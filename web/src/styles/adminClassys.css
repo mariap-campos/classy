@@ -1,0 +1,138 @@
+.logo h2 {
+    font-size: 34px;
+}
+
+.logo h3 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.content {
+    position: relative;
+    top: -66px;
+    animation-name: slide;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+.content h2 {
+    font-size: 25px;
+}
+
+.content span {
+    font-family: 'Long Cang';
+    color: var(--grayDark);
+    font-size: 30px;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icons-form {
+    display: flex;
+    flex-direction: column;
+    top: -15px;
+    right: -42px;
+    top: 9px;
+    position: absolute;
+}
+
+.icon {
+    margin-bottom: 4px;
+    background-color: var(--blue);
+    padding: 4px;
+    border-radius: 4px;
+    pointer-events: all;
+}
+
+ul {
+    list-style: none;
+    margin: 30px 0;
+    padding: 0;
+}
+
+li {
+    background-color: var(--back);
+    padding: 24px;
+    margin: 22px auto;
+    width: 60%;
+    border: 1px solid #f1f1f1;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    border-radius: 12px;
+    margin: 22px auto 71px;
+    position: relative;
+}
+
+
+li h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+li p {
+    color: var(--darkyellow)!important;
+    font-weight: 600;
+}
+
+li .entrar {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    border: none;
+    height: 51px;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    color: var(--blue);
+    font-weight: 800;
+    font-size: 14px;
+    font-family: var(--Noto);
+    top: calc(100% - 15px);
+    transition: all ease 0.5s;
+}
+
+li .entrar:hover {
+    background-color: var(--blue);
+    color: white;
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+
+
+.new-classy{
+    width: 68%;
+    border: none;
+    display: flex;
+    margin: 0 auto;
+    background-color: var(--grayDark);
+    padding: 20px;
+    box-shadow: 4px 4px 1px 0 var(--yellow);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Noto Sans';
+    font-size: 16px;
+    text-align: center;
+    transition: all ease 0.5s;
+    justify-content: center;
+    font-weight: 800;
+}
+
+.new-classy:hover {
+    background-color: var(--black);
+    transition: all ease 0.5s;
+    cursor: pointer;
+}
+
+.actions {
+    background: none;
+    border: none;
+    width: fit-content;
+    cursor: pointer;
+}
+
+
+
+

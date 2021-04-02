@@ -1,0 +1,160 @@
+
+.container {
+    background-color: var(--back);
+    min-height: 100vh;
+    position: relative;
+    padding: 0px 0px 95px 0px;
+}
+.header {
+    display: flex;
+    margin: 0 auto;
+    background-color: var(--grayDark);
+    width: 100%;
+    height: 220px;
+    align-items: center;
+    top: 0;
+}
+
+.header-itens {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    width: 60%;
+    margin: 30px auto;
+    position: relative;
+    top: -66px;
+    border-radius: 14px;
+    box-shadow: antiquewhite;
+    background-color: white;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    padding: 60px 140px;
+    box-sizing: border-box;
+    animation-name: slide;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+.logo p{
+    margin: 0;
+    color: white;
+    line-height: 12px;
+}
+
+.logo h2 {
+    margin: 0;
+    font-family: var(--Long);
+    color: white;
+    font-size: 32px;
+    line-height: 30px;
+}
+
+.content p {
+    font-size: 14px;
+    color: var(--grayDark);
+}
+
+.signup h3 {
+    position: relative;
+    margin: 25px 0;
+}
+
+.signup h3::after {
+    position: absolute;
+    content: "";
+    height: 2px;
+    background-color: var(--blue);
+    width: 70%;
+    margin-left: 15px;
+    top: 50%;
+}
+
+#errors {
+    border-radius: 8px;
+    color: var(--darkyellow);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+input[type=submit]#adicionar   {
+    margin-top: 20px;
+}
+
+label[for=campoFinal] {
+    bottom: -44px!important;
+}
+
+label[for=campoSenha2] {
+    right: 0;
+}
+
+
+.label {
+    display: flex;
+    flex-direction: column;
+    width: 5%;
+}
+
+.obs {
+    color: var(--blue)!important;;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.input-double {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.input-double label.error {
+    position: absolute;
+    bottom: -28px;
+    font-size: 13px;
+}
+
+span  {
+    color: var(--grayLight);
+}
+
+header .register {
+    background-color: transparent;
+    border: 2px solid white;
+    height: fit-content;
+    padding: 4px 14px;
+    border-radius: 4px;
+    color: white;
+    align-self: flex-end;
+    text-decoration: none;
+    transition: all 0.5s ease;
+    margin: auto 0;
+}
+
+header .register:hover {
+    background-color: var(--darkblue);
+    color: white;
+    border: 2px solid var(--darkblue);
+    transition: all 0.5s ease;
+}
+
+footer{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+footer p, footer a {
+    color: var(--grayLight);
+}
+
+footer .classy {
+    font-weight: bold;
+    color: var(--blue);
+}

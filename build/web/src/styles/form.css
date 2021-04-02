@@ -1,0 +1,115 @@
+form {
+    flex-direction: column;
+    display: flex;
+}
+
+input, select, textarea {
+    border: 2px solid var(--grayLight);
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: var(--Noto);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--grayDark);
+    background-color: transparent;
+}
+
+.password-warning {
+    margin-top: 0px;
+    font-weight: 600;
+    color: var(--red)!important;
+    display: none;
+}
+
+label.error {
+    font-weight: 600;
+    color: var(--red);
+    margin-top: -10px;
+    margin-bottom: 14px;
+    font-size: 14px;
+}
+
+.show {
+    display: block;
+}
+
+.has-error {
+    border: 2px solid var(--red);
+}
+
+
+option {
+    color: var(--grayDark);
+    padding: 20px;
+}
+
+input::placeholder {
+    color: var(--grayLight);
+    font-family: var(--Noto);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input.error, textarea.error {
+    border: 2px solid var(--red);
+}
+
+.input-double{
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-double input {
+    width: 45%;
+}
+
+.label-double {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+    color: var(--grayLight);
+    font-size: 14px;
+}
+
+input[type=submit] {
+    background-color: var(--grayDark);
+    padding: 12px;
+    margin-bottom: 18px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px 0 var(--blue);
+    text-align: center;
+    transition: all 0.5s ease;
+    border-radius: 4px;
+}
+
+input[type=submit]:hover {
+    background-color: var(--black);
+    transition: all 0.5s ease;
+}
+
+input:focus{
+    outline: var(--blue) auto 3px;
+}
+
+input.is--invalid {
+    outline: rgb(186, 75, 75) auto 2px;
+}
+
+textarea {
+    border: 2px solid var(--grayLight);
+    margin-bottom: 12px;
+    padding: 10px;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+textarea::placeholder {
+    color: var(--grayLight);
+    font-family: var(--Noto);
+    font-weight: 500;
+    font-size: 14px;
+}

@@ -1,0 +1,99 @@
+
+
+.classy-atividade {
+    margin: 40px auto;
+    width: 50%;
+    background: white;
+    display: flex;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    border-radius: 14px;
+    box-sizing: border-box;
+    flex-direction: column;
+    animation-name: slide;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+.classy-atividade .ativ-top {
+    text-align: center;
+    padding: 10px;
+}
+
+.ativ-top h4 {
+    color: var(--grayDark);
+    margin: 8px;
+}
+
+.ativ-top .materia {
+    font-weight: 600;
+    color: var(--darkyellow);
+}
+
+.classy-atividade .descricao {
+    padding: 15px 51px;
+    line-height: 31px;
+    margin: 0;
+    font-size: 15px;
+    color: var(--grayDark);
+    font-weight: 500;
+}
+
+.classy-atividade .descricao span{
+    color: var(--darkyellow);
+}
+
+.classy-atividade .footer,  .classy-atividade .footer form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.classy-atividade .footer {
+    background-color: #fbfbfb;
+    padding: 26px 50px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top: 2px solid var(--blue);
+}
+
+.classy-atividade .footer form{
+    display: flex;
+    flex-direction: row;
+}
+
+.classy-atividade .footer p {
+    font-weight: 500;
+    color: var(--grayDark);
+}
+
+.classy-atividade .footer span {
+    color: var(--blue);
+    padding: 7px;
+    border-radius: 9px;
+    background-color: var(--blue);
+    color: white;
+    font-size: 16px;
+    margin-left: 4px;
+}
+
+.icons-box button {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icons-box button img {
+    width: 27px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

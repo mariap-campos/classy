@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Classy.</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="src/styles/global.css?v=2">
+        <link rel="stylesheet" href="src/styles/form.css?v=4">
+        <link rel="stylesheet" href="src/styles/signup.css?v=4">
+        <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+                <header class="header">
+                    <div class="header-itens">
+                        <div class="logo">
+                            <p>Bem vindo ao</p>
+                            <h2>Classy.</h2>
+                        </div>
+                        <a href='/Classy/' class="register">Voltar</a>
+                    </div>
+                </header>
+                <div class="content">
+                    <h2>Que bom que você vai se juntar a nós!</h2>
+                    <p>Vamos realizar seu cadastro, é bem rapidinho!</p>
+                    <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAdmin" method="POST" class="signup">
+                        <h3>Dados Pessoais</h3>
+                        <input type="text" name="campoUsuario" id="campoUsuario" placeholder="Usuário">
+                        <input type="text" name="campoNome" id="campoNome" placeholder="Seu Nome">
+                        <input type="text" name="campoEmail" id="campoEmail" placeholder="Seu Email">
+                        <div class="input-double">
+                            <input type="password" name="campoSenha" id="campoSenha" placeholder="Senha">
+                            <input type="password" name="campoSenha2" id="campoSenha2" placeholder="Repetir Senha">
+                        </div>
+                        <div id="errors"></div>
+                        <h3>Dados do Classy</h3>
+                        <p>Aqui vamos colocar algumas informações da sua turma.</p>
+                        <p class="obs">obs. Não se preocupe! Voce vai poder criar mais classys depois se quiser ;)</p>
+                        <input type="text" name="campoClassy" id="campoClassy" placeholder="Nome do Classy">
+                        <input type="text" name="campoInsti" id="campoInsti" placeholder="Nome da Instituição">
+                        <p>Separe o nome das matéria utilizando ponto e vírgula <span>(exemplo: "Matemática;Física")</span></p>
+                        <textarea name="campoMaterias" id="campoMaterias" placeholder="Matérias"></textarea>
+                        <div class="label-double">
+                            <label>Ínicio do Semestre</label>
+                            <label>Final do Semestre</label>
+                        </div>
+                        <div class="input-double">
+                            <input type="date" name="campoInicio" id="campoInicio" placeholder="Inicio do Semestre">
+                            <input type="date" name="campoFinal" id="campoFinal" placeholder="Termino do Semestre">
+                        </div>
+                        <input id="adicionar" type="submit" name="acao" value="Cadastrar">
+                    </form>
+                </div>
+                <footer>
+                    <p>O que é o <a href='/' class="classy">Classy.?</a></p>
+                    <p><a href='/'>Termos de Uso</a></p>
+                </footer>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="src/js/jquery.password-validation.js?v=1"></script>
+        <script src="src/js/formValidate.js?v=2"></script>
+        <script src="src/js/validatePassword.js?v=2"></script>
+    </body>
+</html>

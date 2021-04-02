@@ -1,0 +1,76 @@
+:root {
+    /* Cores */
+    /* --green: #B7D6D1;
+    --darkGreen: #8dada8; */
+    --blue: #74d5de;
+    --darkblue: #56cad8;
+    --yellow: #fed385;
+    --darkyellow: #fcc486;
+    --red:#fd8369;
+    --white: #ffffff;
+    --grayLight: #C0C0C0;
+    --grayDark: #3B3941;
+    --black: #191720;
+    --back: #f3f4f6;
+
+    /* Fontes */
+    --Noto: 'Poppins', sans-serif;
+    --Long: 'Long Cang', cursive;
+
+}
+
+body {
+    font-family: var(--Noto);
+    box-sizing: border-box;
+    margin: 0;
+}
+
+h2{
+    margin: 0;
+    line-height: 36px;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: var(--grayDark);
+}
+
+h3{
+    margin: 0;
+    line-height: 30px;
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--grayDark);
+}
+
+p {
+    font-size: 14px;
+    line-height: 18px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    font-family: var(--Noto);
+}
+
+/* animations */
+
+@keyframes slide {
+    0% { transform: translateX(-150px); opacity: 0; }
+    50% { transform: translateX(0px); opacity: 1; }
+ }
+
+ @keyframes slide-out {
+    0% { transform: translateX(0px); opacity: 1; }
+    30% { transform: translateX(-150px); opacity: 0; }
+ }
+
+ @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+ }
+
+
+
+  
