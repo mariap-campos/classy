@@ -5,13 +5,11 @@
  */
 package dao;
 
-import static dao.ClassyDAO.SELECT_ID;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import modelo.Admin;
-import modelo.Classy;
 import util.ConectaBanco;
 
 /**

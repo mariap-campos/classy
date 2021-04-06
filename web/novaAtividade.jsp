@@ -4,6 +4,7 @@
     Author     : Maria Paula
 --%>
 
+<%@page import="modelo.Classy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,6 +21,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
+        <% 
+            String[] materias = (String[]) request.getAttribute("materias");
+            Classy classy = (Classy) request.getAttribute("classy");
+        %>
         <div class="container">
                 <header class="header">
                     <div class="header-itens">
@@ -28,7 +33,7 @@
                             <h3>Analise e Desenvolvimento de Sistemas - 4º</h3>
                             <p>Fatec</p>
                         </div>
-                        <a href='home.html' class="register">Sair</a>
+                        <a href='home.html' id="goBack" class="register">Voltar</a>
                     </div>
                     <nav>
                         <button class="current">Home</button>
@@ -47,21 +52,28 @@
                         </div>
                         <div class="classy-options">
                             <h3>Adicione uma nova atividade!</h3>
-                            <form>
+                            <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAtividade" method="POST">
+                                <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                                 <input type="text" name="txtNome" placeholder="Nome da Atividade">
                                 <textarea type="text" name="txtDesc" placeholder="Descrição"></textarea>
                                 <input type="text" name="txtProfessor" placeholder="Professor">
-                                <select id="materias" placeholder="Matérias">
+                                <select id="materias" name="txtMateria" placeholder="Matérias">
                                     <option selected disabled hidden>Matérias</option>
-                                    <option value="Aplicativos para Web">Aplicativos para Web</option>
-                                    <option value="Banco de Dados">Banco de Dados</option>
+                                    <%
+                                        for (String materia : materias){
+                                    %>
+                                    <option value="<%= materia %>"><%= materia %></option>
+                                    <%
+                                        }
+                                    %>
+                                    <option value="Outros">Outros</option>
                                 </select>
                                 <div class="label-double">
                                     <label>Data de Entrega</label>
                                 </div>
                                 <div class="input-double">
                                     <input type="date" name="txtData" id="campoSenha" placeholder="Data de Entrega">
-                                    <input type="submit" value="Cadastrar">
+                                    <input type="submit" name="acao" value="Cadastrar">
                                 </div>
                             </form>
                             <a class="back">Voltar á home</a>

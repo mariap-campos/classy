@@ -8,18 +8,18 @@ package util;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /**
  *
  * @author Maria Paula
  */
-public class ConverteDate {
-    public static Date getDate(String data) throws ParseException {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        java.util.Date utilDate = df.parse(data);
-        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());           
+public class SeparateSubject {
+    public static String[] splitSubjects(String materias) {
+        
+        String[] subjectsArray = materias.split(";");
 
-    return sqlDate;
+    return subjectsArray;
         
     } 
 }

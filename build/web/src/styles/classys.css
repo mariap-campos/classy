@@ -100,7 +100,7 @@ nav button:hover {
     animation-timing-function: ease;
 }
 
-.classy-options a {
+.classy-options .options {
     width: 80%;
     background-color: var(--yellow);
     box-shadow: 3px 3px 0px 0 var(--darkyellow);
@@ -128,30 +128,35 @@ nav button:hover {
     font-size: 16px;
 }
 
+.classy-options form {
+    display: flex;
+    flex-direction: column;
+}
+
 .classy-options h3::after {
     display: none;
 }
 
-.classy-options a:nth-of-type(3) {
+.classy-options .options:nth-of-type(4) {
     background-color: var(--blue);
     box-shadow: 3px 3px 0px 0 var(--darkblue);
 }
 
-.classy-options a:nth-of-type(3):hover {
+.classy-options .options:nth-of-type(4):hover {
     background-color: var(--darkblue);
 }
 
-.classy-options a:nth-of-type(4) {
+.classy-options .options:nth-of-type(5) {
     background-color: var(--grayDark);
     box-shadow: 3px 3px 0px 0 var(--black);
 }
 
-.classy-options a:nth-of-type(4):hover {
+.classy-options .options:nth-of-type(5):hover {
     background-color: var(--black);
 }
 
 
-.classy-options a:hover {
+.classy-options .options:hover {
     background-color: var(--darkyellow);
     transition: all 0.5s ease;
 }
@@ -173,5 +178,6 @@ footer {
 }
 
 .back {
-    width: 92% !important;
+    margin: 0 auto;
+    cursor: pointer;
 }

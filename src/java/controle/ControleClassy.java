@@ -10,7 +10,6 @@ import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Admin;
 import modelo.Classy;
 import util.ConverteDate;
+import util.SeparateSubject;
 
 /**
  *
@@ -125,7 +125,22 @@ public class ControleClassy extends HttpServlet {
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
-            }  
+            } else if ("Nova Atividade".equals(acao)) {
+                modelo.Classy classy = new modelo.Classy();
+                classy.setToken(Integer.parseInt(request.getParameter("id")));
+                
+                
+                dao.ClassyDAO cdao = new dao.ClassyDAO();
+                Classy classyBuscar = new Classy();
+                classyBuscar = cdao.consultarPorId(classy);
+                
+                SeparateSubject separator = new SeparateSubject();
+                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
+
+                request.setAttribute("materias", materias);
+                request.setAttribute("classy", classy);
+                request.getRequestDispatcher("novaAtividade.jsp").forward(request, response);
+            }    
         } catch (Exception e) {
             System.out.println(e);
 //            request.setAttribute("erro", e);

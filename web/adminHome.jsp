@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
-        <link rel="stylesheet" href="src/styles/classys.css">
+        <link rel="stylesheet" href="src/styles/classys.css?v=1">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -33,7 +33,7 @@
                             <h3><%= classy.getNome() %></h3>
                             <p><%= classy.getNome_instituicao() %></p>
                         </div>
-                        <a href='/Classy/' class="register">Voltar</a>
+                        <a href='/Classy/' class="register">Sair</a>
                     </div>
                     <nav>
                         <button class="current">Home</button>
@@ -52,10 +52,13 @@
                             <img src="src/images/hero-img3.png" class="img" alt="Meeting">
                         </div>
                         <div class="classy-options">
-                        <a href="novaAtividade.jsp">Nova Atividade</a>
-                        <a>Nova Prova</a>
-                        <a>Novo Aluno</a>
-                        <a>Publicar no Fórum</a>
+                            <form name="adminAtividade" name="FEntrada" action="ControleClassy" method="POST" >
+                                <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
+                                <input class="options" type="submit" name="acao" value="Nova Atividade">
+                                <input class="options" type="submit" name="acao" value="Nova Prova">
+                                <input class="options" type="submit" name="acao" value="Novo Aluno">
+                                <input class="options" type="submit" name="acao" value="Publicar no Fórum"> 
+                            </form>
                     </div>
                 </div>
                 </div>
