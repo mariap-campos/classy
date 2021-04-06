@@ -32,7 +32,7 @@
                 <div class="content">
                     <h2>Editar Classy</h2>
                     <p>Atualize as informações abaixo sobre a turma:</p>
-                    <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleClassy" method="POST" class="signup">
+                    <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleClassy" method="POST" class="signup form">
                         <h3>Dados do Classy</h3>
                         <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                         <input type="text" name="campoClassy" id="campoClassy" placeholder="Nome do Classy" value="<%= classy.getNome() %>">
@@ -47,7 +47,7 @@
                             <input type="date" name="campoInicio" id="campoInicio" placeholder="Inicio do Semestre" value="<%= classy.getData_inicio() %>">
                             <input type="date" name="campoFinal" id="campoFinal" placeholder="Termino do Semestre" value="<%= classy.getData_final() %>">
                         </div>
-                        <input id="adicionar" type="submit" name="acao" value="Atualizar">
+                        <input id="adicionar" type="submit" name="acao" value="Atualizar" class="submit">
                     </form>
                 </div>
                 <footer>

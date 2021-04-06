@@ -5,13 +5,11 @@
  */
 package controle;
 
+import dao.AdminDAO;
+import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,14 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Admin;
 import modelo.Atividade;
 import modelo.Classy;
-import util.ConverteDate;
 
 /**
  *
  * @author Maria Paula
  */
-@WebServlet(name = "ControleAtividade", urlPatterns = {"/ControleAtividade"})
-public class ControleAtividade extends HttpServlet {
+@WebServlet(name = "ControleTabs", urlPatterns = {"/ControleTabs"})
+public class ControleTabs extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,34 +36,28 @@ public class ControleAtividade extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String acao = request.getParameter("acao");
-            if ("Cadastrar".equals(acao)) {
-                int classy_token = Integer.parseInt(request.getParameter("id"));
+            if ("Home".equals(acao)) {
+                Classy classyId = new Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                classyId.setToken(id);
                 
-                modelo.Atividade ativ = new modelo.Atividade();
-                ativ.setNome(request.getParameter("txtNome"));
-                ativ.setDescricao(request.getParameter("txtDesc"));
-                ativ.setProfessor(request.getParameter("txtProfessor"));
-                ativ.setMateria(request.getParameter("txtMateria"));
-                ativ.setClassy_token(classy_token);
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
                 
-                ConverteDate conversor = new ConverteDate();
-                Date data1 = conversor.getDate(request.getParameter("txtData"));
-               
-                ativ.setData_entrega(data1);
-               
+                AdminDAO adao = new AdminDAO();
+                Admin adminId = new Admin();
+                adminId.setId(classy.getId_admin());
                 
-                dao.AtividadeDAO adao = new dao.AtividadeDAO();
-                adao.cadastrar(ativ);
-                System.out.println("Atividade cadastrada com Sucesso!");
+                Admin admin = adao.consultarPorId(adminId);
                 
-                request.setAttribute("title", "Atividade criada com sucesso!");
-                request.setAttribute("mensagem", "Voltando a home do seu classy.");
-                request.setAttribute("tipo", "Voltar");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                request.setAttribute("classy", classy);
+                request.setAttribute("admin", admin);
+                request.getRequestDispatcher("adminHome.jsp").forward(request, response);
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     
@@ -78,7 +69,6 @@ public class ControleAtividade extends HttpServlet {
                     todosAtividade = cdao.consultarTodos(ativ);
                     
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classy_token);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
                     System.out.println("Login Efetuado!");
             }
@@ -97,11 +87,7 @@ public class ControleAtividade extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ControleAtividade.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -115,11 +101,7 @@ public class ControleAtividade extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(ControleAtividade.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

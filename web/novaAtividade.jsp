@@ -36,11 +36,13 @@
                         <a href='home.html' id="goBack" class="register">Voltar</a>
                     </div>
                     <nav>
-                        <button class="current">Home</button>
-                        <button>Atividades</button>
-                        <button>Provas</button>
-                        <button>Alunos</button>
-                        <button>Fórum</button>
+                        <form name="adminAtividade" name="FEntrada" action="ControleAtividade" method="POST" >
+                            <input type="submit" name="acao" value="Home" class=" tabs current">
+                            <input type="submit" name="acao" value="Atividades" class="tabs">
+                            <input type="submit" name="acao" value="Provas" class="tabs">
+                            <input type="submit" name="acao" value="Alunos" class="tabs">
+                            <input type="submit" name="acao" value="Fórum" class="tabs">
+                        </form>
                     </nav>
                 </header>
                 <div class="classy-box">
@@ -52,7 +54,7 @@
                         </div>
                         <div class="classy-options">
                             <h3>Adicione uma nova atividade!</h3>
-                            <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAtividade" method="POST">
+                            <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAtividade" method="POST" class="form">
                                 <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                                 <input type="text" name="txtNome" placeholder="Nome da Atividade">
                                 <textarea type="text" name="txtDesc" placeholder="Descrição"></textarea>
@@ -73,7 +75,7 @@
                                 </div>
                                 <div class="input-double">
                                     <input type="date" name="txtData" id="campoSenha" placeholder="Data de Entrega">
-                                    <input type="submit" name="acao" value="Cadastrar">
+                                    <input type="submit" name="acao" value="Cadastrar" class="submit">
                                 </div>
                             </form>
                             <a class="back">Voltar á home</a>

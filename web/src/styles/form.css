@@ -1,9 +1,9 @@
-form {
+form.form {
     flex-direction: column;
     display: flex;
 }
 
-input, select, textarea {
+form.form input, form.form select, form.form textarea {
     border: 2px solid var(--grayLight);
     margin-bottom: 12px;
     padding: 10px;
@@ -72,7 +72,7 @@ input.error, textarea.error {
     font-size: 14px;
 }
 
-input[type=submit] {
+input[type=submit].submit {
     background-color: var(--grayDark);
     padding: 12px;
     margin-bottom: 18px;
@@ -86,7 +86,7 @@ input[type=submit] {
     border-radius: 4px;
 }
 
-input[type=submit]:hover {
+input[type=submit].submit:hover {
     background-color: var(--black);
     transition: all 0.5s ease;
 }

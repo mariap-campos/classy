@@ -23,8 +23,9 @@ nav {
     right: 20px;
 }
 
-nav button {
+nav .tabs {
     background-color: var(--darkblue);
+    color: var(--grayDark);
     border: none;
     padding: 12px;
     width: 134px;
@@ -35,16 +36,18 @@ nav button {
     cursor: pointer;
     transition: all ease 0.5s;
     box-shadow: 3px 0px 0px 0px var(--back);
+    margin-bottom: 0px;
 }
 
-nav button:hover {
+nav .tabs:hover {
     background-color: var(--yellow);
     transition: all ease 0.5s;
 }
 
 .current {
-    background-color: var(--back)!important;
-    color: var(--darkblue);
+background-color: var(--back)!important;
+    color: var(--darkblue)!important;
+    font-weight: 600;
 }
 
 .classy-box{

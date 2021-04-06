@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
-        <link rel="stylesheet" href="src/styles/classys.css?v=1">
+        <link rel="stylesheet" href="src/styles/classys.css?v=3">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -36,11 +36,14 @@
                         <a href='/Classy/' class="register">Sair</a>
                     </div>
                     <nav>
-                        <button class="current">Home</button>
-                        <button>Atividades</button>
-                        <button>Provas</button>
-                        <button>Alunos</button>
-                        <button>Fórum</button>
+                        <form name="adminAtividade" name="FEntrada" action="ControleAtividade" method="POST" >
+                            <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
+                            <input type="submit" name="acao" value="Home" class=" tabs current">
+                            <input type="submit" name="acao" value="Atividades" class="tabs">
+                            <input type="submit" name="acao" value="Provas" class="tabs">
+                            <input type="submit" name="acao" value="Alunos" class="tabs">
+                            <input type="submit" name="acao" value="Fórum" class="tabs">
+                        </form>
                     </nav>
                 </header>
                 <div class="classy-box">

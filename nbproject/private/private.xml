@@ -4,13 +4,16 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/atualizarClassy.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/success.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/util/ConverteDate.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/jquery.password-validation.js</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminAtividade.jsp</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/listarClassy.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/validatePassword.js</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/dao/ClassyDAO.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleAtividade.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/classys.css</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/modelo/Atividade.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/dao/AtividadeDAO.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleAdmin.java</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleClassy.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/formValidate.js</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminLogin.html</file>
         </group>
     </open-files>
 </project-private>
