@@ -22,6 +22,7 @@ public class ClassyDAO {
     public static final String INSERT = "INSERT INTO classy (nome, nome_instituicao, data_inicio, data_final, materias, id_admin) values (?,?,?,?,?,?)";
     public static final String SELECT = "SELECT * from classy where id_admin=?";
     public static final String SELECT_ID = "SELECT * from classy where token=?";
+    public static final String DELETE = "DELETE FROM classy WHERE token=?";
     public static final String UPDATE = "UPDATE classy SET nome = ?, nome_instituicao = ?, materias = ?, data_inicio = ?, data_final = ? WHERE token=?";
 
     public void cadastrar(Classy classy) {
@@ -129,6 +130,25 @@ public class ClassyDAO {
             pstmt.setDate(5, classy.getData_final());
             pstmt.setInt(6, classy.getToken());
 
+            pstmt.execute();   
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    }
+    
+        public void apagar(Classy classy) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(DELETE);
+            pstmt.setInt(1, classy.getToken());
             pstmt.execute();   
         } catch (Exception e){
             throw new RuntimeException(e);

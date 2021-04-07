@@ -19,20 +19,33 @@
 
     </head>
     <body>
+        <% 
+            Integer classy = (Integer) request.getAttribute("classy");
+        %>
         <div class="container" id="cont">
             <svg class="checkmark success" id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark_circle_success" cx="26" cy="26" r="25" fill="none"/><path class="checkmark_check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" stroke-linecap="round"/></svg>
             <h2><%= request.getAttribute("title") %></h2>
             <p><%= request.getAttribute("mensagem") %></p>
+            <button id="voltar" onclick="javascript:history.go(-2)" style="display:none;"></button>
+            <form name="FEntrada" action="ControleAtividade" method="POST" style="display: none;">
+                <input type="number" name="id" value="<%= classy %>">
+                <input id="listar" type="submit" name="acao" value="Todos">
+            </form>
         </div>
     </body>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript">
-        <% if (request.getAttribute("tipo") == "Cadastrar") { %>
+    <% if (request.getAttribute("tipo") == "Cadastrar") { %>
         window.onload = function() {
         setTimeout(function(){ window.location.pathname = "/Classy/adminLogin.html"; }, 3000)
     }
     <% } else if (request.getAttribute("tipo") == "Listar") {%>
         window.onload = function() {
-        setTimeout(function(){ history.back(-2) }, 3000)
+        setTimeout(function(){ $('#voltar').click(); }, 3000)
+    }
+    <% } else if (request.getAttribute("tipo") == "Atividade") {%>
+        window.onload = function() {
+        setTimeout(function(){ $('#listar').click(); }, 3000)
     }
     <% } else if (request.getAttribute("tipo") == "Voltar") {%>
         window.onload = function() {

@@ -32,7 +32,7 @@
     }
     <% } else if (request.getAttribute("tipo") == "Listar") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#listar').click(); }, 3000)
+        setTimeout(function(){ history.back(-2) }, 3000)
     }
     <% }%>
     </script>

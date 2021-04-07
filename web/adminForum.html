@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Classy.</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/styles/global.css">
+        <link rel="stylesheet" href="/styles/signup.css">
+        <link rel="stylesheet" href="/styles/form.css">
+        <link rel="stylesheet" href="/styles/classyForum.css">
+        <link rel="stylesheet" href="/styles/classys.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+                <header class="header">
+                    <div class="header-itens">
+                        <div class="logo">
+                            <h2>Classy.</h2>
+                            <h3>Analise e Desenvolvimento de Sistemas - 4º</h3>
+                            <p>Fatec</p>
+                        </div>
+                        <a href='home.html' class="register">Voltar</a>
+                    </div>
+                    <nav>
+                        <button >Home</button>
+                        <button>Atividades</button>
+                        <button>Provas</button>
+                        <button>Alunos</button>
+                        <button class="current">Fórum</button>
+                    </nav>
+                </header>
+                <form>
+                    <h4>Faça uma postagem no fórum!</h4>
+                    <textarea name="txtDesc" placeholder="Descrição"></textarea>
+                    <div class="input-double">
+                        <input type="text" name="txtData" id="campoSenha" placeholder="Assunto">
+                        <input type="submit" value="Postar">
+                    </div>
+                </form>
+                <ul> 
+                    <!-- <li class="classy-forum empty">
+                        <div class="ativ-top">
+                            <h4>Ops! Parece que não há postagens no fórum ainda.</h4>
+                            <p class="materia">:(</p>
+                        </div>
+                    </li> -->
+                    <li class="classy-forum">
+                        <div class="user">
+                            <p>Usuário</p>
+                            <img class="icon" width="20" src="src/icons/user.svg" alt="coração">
+                        </div>
+                        <div class="message">
+                            <h5>Assunto</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                            <p class="date"> Postado em: 31/03/2021</p>
+                            <div class="icons-box">
+                                <form name="FEntrada" action="ControleCompras" method="POST">
+                                    <input type="number" name="id" value="<%= c.getId() %>" style="display: none;">
+                                    <button class="actions" type="submit" name="acao" value="abrirAtualizar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="classy-forum">
+                        <div class="user">
+                            <p>Usuário</p>
+                            <img class="icon" width="20" src="src/icons/user.svg" alt="coração">
+                        </div>
+                        <div class="message">
+                            <h5>Assunto</h5>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                            <p class="date"> Postado em: 31/03/2021</p>
+                            <div class="icons-box">
+                                <form name="FEntrada" action="ControleCompras" method="POST">
+                                    <input type="number" name="id" value="<%= c.getId() %>" style="display: none;">
+                                    <button class="actions" type="submit" name="acao" value="abrirAtualizar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                </div>
+                <footer>
+                    <p>O que é o <a href='/' class="classy">Classy.?</a></p>
+                    <p><a href='/'>Termos de Uso</a></p>
+                </footer>
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

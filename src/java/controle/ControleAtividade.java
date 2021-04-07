@@ -5,10 +5,14 @@
  */
 package controle;
 
+import dao.AtividadeDAO;
+import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +25,7 @@ import modelo.Admin;
 import modelo.Atividade;
 import modelo.Classy;
 import util.ConverteDate;
+import util.SeparateSubject;
 
 /**
  *
@@ -65,10 +70,12 @@ public class ControleAtividade extends HttpServlet {
                 
                 request.setAttribute("title", "Atividade criada com sucesso!");
                 request.setAttribute("mensagem", "Voltando a home do seu classy.");
-                request.setAttribute("tipo", "Voltar");
+                request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
-            } else if ("Atividades".equals(acao)) {
+            } else if ("Todos".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -77,10 +84,133 @@ public class ControleAtividade extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarTodos(ativ);
                     
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classy_token);
+                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
-                    System.out.println("Login Efetuado!");
+            } else if ("10 dias seguintes".equals(acao)) {
+                    int classy_token = Integer.parseInt(request.getParameter("id"));
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
+                    
+                    Atividade ativ = new Atividade();
+                    ativ.setClassy_token(classy_token);
+                
+                    dao.AtividadeDAO cdao = new dao.AtividadeDAO();
+                    ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
+                    todosAtividade = cdao.consultar10(ativ);
+                    
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
+                    request.setAttribute("atividades", todosAtividade);
+                    request.setAttribute("classy", classyBuscar);
+                    System.out.println("atividades " + todosAtividade);
+                    request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
+            } else if ("Atrasadas".equals(acao)) {
+                    int classy_token = Integer.parseInt(request.getParameter("id"));
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
+                    
+                    Atividade ativ = new Atividade();
+                    ativ.setClassy_token(classy_token);
+                
+                    dao.AtividadeDAO cdao = new dao.AtividadeDAO();
+                    ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
+                    todosAtividade = cdao.consultarAtrasadas(ativ);
+                    
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
+                    request.setAttribute("atividades", todosAtividade);
+                    request.setAttribute("classy", classyBuscar);
+                    System.out.println("atividades " + todosAtividade);
+                    request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
+            } else if ("Filtrar".equals(acao)) {
+                    int classy_token = Integer.parseInt(request.getParameter("id"));
+                    
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
+                    
+                    Atividade ativ = new Atividade();
+                    ativ.setClassy_token(classy_token);
+                    ativ.setMateria(request.getParameter("txtMateria"));
+                
+                    dao.AtividadeDAO cdao = new dao.AtividadeDAO();
+                    ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
+                    todosAtividade = cdao.consultarPorMateria(ativ);
+                    
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
+                    request.setAttribute("atividades", todosAtividade);
+                    request.setAttribute("classy", classyBuscar);
+                    System.out.println("atividades " + todosAtividade);
+                    request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
+            } else if ("abrirForm".equals(acao)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+          
+                Atividade ativ = new Atividade();
+                ativ.setId(id);
+                
+                dao.AtividadeDAO cdao = new dao.AtividadeDAO();
+                Atividade ativBuscar = new Atividade();
+                ativBuscar = cdao.consultarPorId(ativ);
+
+                
+                Classy classy = new Classy();    
+                classy.setToken(ativBuscar.getClassy_token());
+                ClassyDAO cldao = new ClassyDAO();
+                Classy classyBuscar = cldao.consultarPorId(classy);
+                
+                SeparateSubject separator = new SeparateSubject();    
+                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
+                   
+                request.setAttribute("atividade", ativBuscar);
+                request.setAttribute("materias", materias);
+                request.getRequestDispatcher("atualizarAtividade.jsp").forward(request, response);
+            } else if ("Atualizar".equals(acao)) {
+                Atividade ativ = new Atividade();
+                int id = Integer.parseInt(request.getParameter("id"));
+                int id_classy = Integer.parseInt(request.getParameter("id_classy"));
+                
+                ativ.setId(id);
+                ativ.setNome(request.getParameter("txtNome"));
+                ativ.setDescricao(request.getParameter("txtDesc"));
+                ativ.setProfessor(request.getParameter("txtProfessor"));
+                ativ.setMateria(request.getParameter("txtMateria"));
+                
+                ConverteDate conversor = new ConverteDate();
+                Date data1 = conversor.getDate(request.getParameter("txtData"));
+               
+                ativ.setData_entrega(data1);
+                
+                AtividadeDAO cdao = new AtividadeDAO();
+                cdao.atualizar(ativ);
+                
+                request.setAttribute("title", "Informações da Atividade atualizadas!");
+                request.setAttribute("mensagem", "Voltando a página de listagem.");
+                request.setAttribute("classy", id_classy);
+                request.setAttribute("tipo", "Atividade");
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            } else if ("Apagar".equals(acao)) {
+                Atividade atividade = new Atividade();
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                atividade.setId(id);
+                AtividadeDAO adao = new AtividadeDAO();
+                adao.apagar(atividade);     
+                
+                request.setAttribute("title", "Atividade apagada com sucesso!");
+                request.setAttribute("mensagem", "Voltando a página de listagem de suas atividades.");
+                request.setAttribute("tipo", "Atividade");
+                request.getRequestDispatcher("success.jsp").forward(request, response);
             }
         }
     }

@@ -1,0 +1,46 @@
+.filters form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 5%;
+    background-color: white;
+    border-radius: 12px;
+    margin-top: 60px;
+    font-weight: 600;
+    color: var(--grayDark);
+    box-shadow: 2px 8px 16px rgb(24 50 115 / 10%);
+    padding: 11px;
+}
+
+.filters form input {
+    background-color: var(--grayLight);
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 600;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: 0.5s ease all;
+}
+.todos {
+    margin-top: 10px;
+    background-color: var(--grayDark)!important;
+}
+
+#materias {
+    border: 2px solid var(--grayLight);
+    margin-bottom: 4px;
+    padding: 5px;
+    border-radius: 4px;
+    font-family: var(--Noto);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--grayDark);
+    background-color: transparent;
+}
+
+.filters form input:hover {
+    background-color: var(--grayDark)!important;
+    transition: 0.5s ease all;
+}

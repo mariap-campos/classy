@@ -60,14 +60,21 @@ public class ControleTabs extends HttpServlet {
                 request.getRequestDispatcher("adminHome.jsp").forward(request, response);
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
                 
-                    dao.AtividadeDAO cdao = new dao.AtividadeDAO();
+                    dao.AtividadeDAO adao = new dao.AtividadeDAO();
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
-                    todosAtividade = cdao.consultarTodos(ativ);
+                    todosAtividade = adao.consultarTodos(ativ);
                     
+                    ClassyDAO cdao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = cdao.consultarPorId(classy);
+                    
+                    request.setAttribute("classy", classyBuscar);
                     request.setAttribute("atividades", todosAtividade);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
                     System.out.println("Login Efetuado!");

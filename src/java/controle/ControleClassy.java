@@ -10,6 +10,11 @@ import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,7 +42,7 @@ public class ControleClassy extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String acao = request.getParameter("acao");
@@ -88,7 +93,7 @@ public class ControleClassy extends HttpServlet {
                 
                 request.setAttribute("title", "Classy criado com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
-                request.setAttribute("tipo", "Voltar");
+                request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
             } else if ("abrirAtualizar".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -138,9 +143,37 @@ public class ControleClassy extends HttpServlet {
                 String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
 
                 request.setAttribute("materias", materias);
-                request.setAttribute("classy", classy);
+                request.setAttribute("classy", classyBuscar);
                 request.getRequestDispatcher("novaAtividade.jsp").forward(request, response);
-            }    
+            } else if ("Apagar".equals(acao)) {
+                modelo.Classy classy = new modelo.Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                classy.setToken(id);
+                dao.ClassyDAO cdao = new dao.ClassyDAO();
+                Classy classyBuscar = cdao.consultarPorId(classy);
+                
+                Date data_final = classyBuscar.getData_final();
+                
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+                LocalDateTime now = LocalDateTime.now(); 
+                
+                ConverteDate conversor = new ConverteDate();
+                Date agora = conversor.getDate(dtf.format(now));
+                
+                if (agora.after(data_final)) {
+                    cdao.apagar(classy);                
+                    request.setAttribute("title", "Classy apagado com sucesso!");
+                    request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("success.jsp").forward(request, response);
+                } else {
+                   request.setAttribute("title", "O semestre desse classy ainda não acabou!");
+                    request.setAttribute("mensagem", "Se deseja apagá-lo. Favor ajustar data de fim de semestre.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
+            }
         } catch (Exception e) {
             System.out.println(e);
 //            request.setAttribute("erro", e);
@@ -160,7 +193,11 @@ public class ControleClassy extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleClassy.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -174,7 +211,11 @@ public class ControleClassy extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleClassy.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

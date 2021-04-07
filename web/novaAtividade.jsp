@@ -30,13 +30,14 @@
                     <div class="header-itens">
                         <div class="logo">
                             <h2>Classy.</h2>
-                            <h3>Analise e Desenvolvimento de Sistemas - 4º</h3>
-                            <p>Fatec</p>
+                            <h3><%= classy.getNome() %></h3>
+                            <p><%= classy.getNome_instituicao() %></p>
                         </div>
-                        <a href='home.html' id="goBack" class="register">Voltar</a>
+                        <a href='/Classy/' id="goBack" class="register">Sair</a>
                     </div>
                     <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleAtividade" method="POST" >
+                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                            <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
                             <input type="submit" name="acao" value="Provas" class="tabs">
@@ -88,6 +89,9 @@
                 </footer>
         </div>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="src/js/jquery.password-validation.js?v=1"></script>
+        <script src="src/js/formValidate.js?v=3"></script>
         <script>
             $(".back").click(function() {
                 history.back();

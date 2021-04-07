@@ -51,8 +51,8 @@ input::placeholder {
     font-size: 14px;
 }
 
-input.error, textarea.error {
-    border: 2px solid var(--red);
+input.error, textarea.error, select.error {
+    border: 2px solid var(--red)!important;
 }
 
 .input-double{

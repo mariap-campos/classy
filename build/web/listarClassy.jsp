@@ -41,6 +41,19 @@
                     <h2>Aqui estão todos os <span>Classys</span> que você administra</h2>
                     <p>Entre em um para começar.</p>
                     <ul class="classy-items">
+                         <%
+                            if (listaClassy.isEmpty()) {
+                        %>
+                        <li class="classy-item">
+                            <div class="box">
+                                <div class="info-box">
+                                    <h4 style="color:var(--blue)">Ops! Parece que está tudo vazio por aqui.</h4>
+                                </div>
+                            </div>
+                        </li>
+                        <%
+                            }
+                        %>
                         <%
                             for (Classy c : listaClassy){
                         %>

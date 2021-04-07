@@ -12,6 +12,11 @@ $(function() {
         campoInicio: "required",
         campoFinal: "required",
         campoMaterias: "required",
+        txtNome: "required",
+        txtDesc: "required",
+        txtProfessor: "required",
+        txtMateria: "required",
+        txtData: "required",
         campoEmail: {
             required: true,
             email: true
@@ -31,6 +36,11 @@ $(function() {
         campoInicio: "Por favor, informe a data de ínicio do semestre.",
         campoFinal: "Por favor, informe a data de término do semestre.",
         campoMaterias: "Por favor, as matérias de sua turma.",
+        txtNome: "Por favor, informe o nome da atividade.",
+        txtDesc: "Por favor, descreva a atividade",
+        txtProfessor: "Por favor, informe o professor.",
+        txtMateria: "Pro favor, informe a matéria",
+        txtData: "Por favor, informe a data de entrega.",
         campoSenha: {
             required: "Por favor, informe uma senha.",
         },
