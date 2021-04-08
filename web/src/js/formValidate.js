@@ -14,6 +14,8 @@ $(function() {
         txtNome: "required",
         txtNomeAluno: "required",
         txtRGM: "required",
+        txtDataProva: "required",
+        txtNomeProva: "required",
         txtPost: "required",
         txtDesc: "required",
         txtProfessor: "required",
@@ -46,6 +48,8 @@ $(function() {
         txtProfessor: "Por favor, informe o professor.",
         txtMateria: "Pro favor, informe a matéria",
         txtData: "Por favor, informe a data de entrega.",
+        txtDataProva: "Por favor, informe a data da prova",
+        txtNomeProva: "Por favor, dê um nome a sua prova!",
         campoSenha: {
             required: "Por favor, informe uma senha.",
         },

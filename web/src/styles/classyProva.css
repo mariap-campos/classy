@@ -1,0 +1,117 @@
+
+
+.classy-prova {
+    margin: 40px auto;
+    width: 38%;
+    background: white;
+    display: flex;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    border-radius: 14px;
+    box-sizing: border-box;
+    justify-content: space-around;
+    position: relative;
+    padding: 16px;
+    align-items: center;
+    animation-name: slide;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+}
+
+.classy-prova::after {
+        content: '';
+        position: absolute;
+        width: 21px;
+        background: linear-gradient(45deg, rgba(116,213,222,1) 15%, rgba(73,189,203,1) 88%);
+        left: 0;
+        border-top-left-radius: 14px;
+        border-bottom-left-radius: 14px;
+        font-weight: 100%;
+        height: 100%;
+}
+
+.classy-prova span{
+    color: var(--darkblue);
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.icons-box {
+    position: absolute;
+    right: -50px;
+}
+
+.classy-prova .ativ-top {
+    text-align: center;
+    padding: 10px;
+}
+
+.ativ-top h4 {
+    color: var(--grayDark);
+    margin: 8px;
+}
+
+.ativ-top .materia {
+    font-weight: 600;
+    color: var(--darkyellow);
+}
+
+.classy-prova .footer,  .classy-prova .footer form{
+    display: flex;
+    justify-content: space-between;
+}
+
+.classy-prova .footer {
+    background-color: #fbfbfb;
+    padding: 26px 50px;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-top: 2px solid var(--blue);
+}
+
+.classy-prova .footer form{
+    display: flex;
+    flex-direction: row;
+}
+
+.classy-prova .footer p {
+    font-weight: 500;
+    color: var(--grayDark);
+}
+
+.classy-prova .footer span {
+    color: var(--blue);
+    padding: 7px;
+    border-radius: 9px;
+    background-color: var(--blue);
+    color: white;
+    font-size: 16px;
+    margin-left: 4px;
+}
+
+.icons-box button {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icons-box button img {
+    width: 27px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

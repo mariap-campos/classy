@@ -66,7 +66,7 @@ public class ControleAtividade extends HttpServlet {
                 System.out.println("Atividade cadastrada com Sucesso!");
                 
                 request.setAttribute("title", "Atividade criada com sucesso!");
-                request.setAttribute("mensagem", "Voltando a home do seu classy.");
+                request.setAttribute("mensagem", "Clique na aba 'Atividades' para ver todas as atividades.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
             } else if ("Todos".equals(acao)) {
@@ -208,6 +208,9 @@ public class ControleAtividade extends HttpServlet {
                 request.setAttribute("tipo", "Atividade");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
             }
+        } catch (Exception e) {
+            System.out.println(e);
+            request.setAttribute("erro", e);
         }
     }
 

@@ -19,6 +19,15 @@ ul {
     animation-timing-function: ease;
 }
 
+.empty {
+    background: white;
+    text-align: c;
+    justify-content: center;
+    width: 50%;
+    margin: 0 70% 0 30%;
+    border-radius: 12px;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+}
 h4, h5 {
     margin: 15px;
     color: var(--grayDark);

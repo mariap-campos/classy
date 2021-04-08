@@ -145,6 +145,21 @@ public class ControleClassy extends HttpServlet {
                 request.setAttribute("materias", materias);
                 request.setAttribute("classy", classyBuscar);
                 request.getRequestDispatcher("novaAtividade.jsp").forward(request, response);
+            }else if ("Nova Prova".equals(acao)) {
+                modelo.Classy classy = new modelo.Classy();
+                classy.setToken(Integer.parseInt(request.getParameter("id")));
+                
+                
+                dao.ClassyDAO cdao = new dao.ClassyDAO();
+                Classy classyBuscar = new Classy();
+                classyBuscar = cdao.consultarPorId(classy);
+                
+                SeparateSubject separator = new SeparateSubject();
+                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
+
+                request.setAttribute("materias", materias);
+                request.setAttribute("classy", classyBuscar);
+                request.getRequestDispatcher("novaProva.jsp").forward(request, response);
             } else if ("Novo Aluno".equals(acao)) {
                 Classy classy = new modelo.Classy();
                 classy.setToken(Integer.parseInt(request.getParameter("id")));

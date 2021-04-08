@@ -47,13 +47,13 @@
                         <a href='/Classy/' id="goBack" class="register">Sair</a>
                     </div>
                     <nav>
-                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
-                            <input type="submit" name="acao" value="Home" class="tabs ">
+                            <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs current">
                             <input type="submit" name="acao" value="Provas" class="tabs">
                             <input type="submit" name="acao" value="Alunos" class="tabs">
-                            <input type="submit" name="acao" value="Fórum" class="tabs">
+                            <input type="submit" name="acao" value="Forum" class="tabs">
                         </form>
                     </nav>
                 </header>

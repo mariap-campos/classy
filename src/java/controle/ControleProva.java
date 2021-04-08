@@ -5,24 +5,27 @@
  */
 package controle;
 
-import dao.AlunoDAO;
-import dao.ForumDAO;
+import dao.ProvaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Aluno;
-import modelo.Forum;
+import modelo.Prova;
+import util.ConverteDate;
 
 /**
  *
  * @author Maria Paula
  */
-@WebServlet(name = "ControleAluno", urlPatterns = {"/ControleAluno"})
-public class ControleAluno extends HttpServlet {
+@WebServlet(name = "ControleProva", urlPatterns = {"/ControleProva"})
+public class ControleProva extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,42 +37,33 @@ public class ControleAluno extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String acao = request.getParameter("acao");
             if ("Cadastrar".equals(acao)) {
                 int classy_token = Integer.parseInt(request.getParameter("id"));
-                Aluno aluno = new Aluno();
-                aluno.setNome(request.getParameter("txtNomeAluno"));
-                aluno.setRgm(request.getParameter("txtRGM"));
-                aluno.setClassy_token(classy_token);
-               
-                AlunoDAO adao = new AlunoDAO();
-                adao.cadastrar(aluno);
                 
-                request.setAttribute("title", "Aluno adicionado com sucesso!");
-                request.setAttribute("mensagem", "Clique na aba 'Alunos' para ver todos os alunos dessa turma");
+                Prova prova = new Prova();
+                prova.setNome(request.getParameter("txtNomeProva"));
+                prova.setMateria(request.getParameter("txtMateria"));
+                prova.setToken_classy(classy_token);
+                
+                ConverteDate conversor = new ConverteDate();
+                Date data1 = conversor.getDate(request.getParameter("txtDataProva"));
+               
+                prova.setData(data1);
+               
+                
+                ProvaDAO adao = new ProvaDAO();
+                adao.cadastrar(prova);
+                System.out.println("Prova cadastrada com Sucesso!");
+                
+                request.setAttribute("title", "Prova marcada com sucesso!");
+                request.setAttribute("mensagem", "Clique na aba 'Provas' para ver todas as provas marcadas.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
-            } else if ("Apagar".equals(acao)) {
-                Aluno aluno = new Aluno();
-                int id = Integer.parseInt(request.getParameter("id"));
-                int classy_id = Integer.parseInt(request.getParameter("classy_id"));
-                
-                aluno.setId(id);
-                AlunoDAO adao = new AlunoDAO();
-                adao.apagar(aluno);     
-                
-                request.setAttribute("title", "Aluno apagado com sucesso!");
-                request.setAttribute("mensagem", "Voltando a lista");
-                request.setAttribute("classy", classy_id);
-                request.setAttribute("tipo", "Aluno");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            request.setAttribute("erro", e);
+            } 
         }
     }
 
@@ -85,7 +79,11 @@ public class ControleAluno extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleProva.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -99,7 +97,11 @@ public class ControleAluno extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleProva.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -1,0 +1,51 @@
+.alunos-container {
+    width: 50%;
+    margin: 0 auto;
+        animation-name: slide;
+    animation-duration: 1.2s;
+    animation-timing-function: ease;
+}
+
+table {
+    width: 100%;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+    background: white;
+}
+
+th {
+    text-align: initial;
+    color: var(--darkblue);
+    padding-bottom: 10px;
+}
+
+td {
+    padding: 10px 0px;
+    border-bottom: 1px solid var(--grayLight);
+    color: var(--grayDark);
+    font-weight: 500;
+}
+
+form button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.empty {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    color: var(--grayDark);
+    font-weight: 600;
+    box-shadow: 2px 8px 16px rgba(24,50,115,.1);
+}
+
+.number {
+    margin: 20px auto;
+    font-weight: 600;
+    color: var(--grayDark);
+}
+

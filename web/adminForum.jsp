@@ -39,7 +39,7 @@
                         <a href='home.html' class="register">Voltar</a>
                     </div>
                     <nav>
-                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs">

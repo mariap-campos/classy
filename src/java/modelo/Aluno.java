@@ -11,7 +11,17 @@ package modelo;
  */
 public class Aluno {
     private int id, classy_token;
-    private String nome, rgm;
+    private String nome, rgm, situacao;
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+    
+    
 
     public int getId() {
         return id;

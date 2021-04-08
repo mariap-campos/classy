@@ -5,23 +5,19 @@
  */
 package controle;
 
-import dao.AdminDAO;
-import dao.AtividadeDAO;
 import dao.ClassyDAO;
 import dao.ForumDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Admin;
 import modelo.Atividade;
 import modelo.Classy;
 import modelo.Forum;
-import util.ConverteDate;
 
 /**
  *
@@ -48,20 +44,29 @@ public class ControleForum extends HttpServlet {
                 int id_admin = Integer.parseInt(request.getParameter("id"));
                 int classy_token = Integer.parseInt(request.getParameter("id_classy"));
                 
+                Classy classyId = new Classy();
+                classyId.setToken(classy_token);
+                
                 Forum forum = new Forum();
                 forum.setPostagem(request.getParameter("txtPost"));
                 forum.setAssunto(request.getParameter("txtAssunto"));
                 forum.setAdmin_id(id_admin);
                 forum.setClassy_token(classy_token);
                 
-                ForumDAO cdao = new ForumDAO();
-                cdao.postar(forum);
+                ForumDAO fdao = new ForumDAO();
+                fdao.postar(forum);
                 
-                request.setAttribute("title", "Postagem feita!");
-                request.setAttribute("mensagem", "Voltando ao fórum");
-                request.setAttribute("classy", classy_token);
-                request.setAttribute("tipo", "Forum");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
+    
+                ArrayList<Forum> todosPost = new ArrayList<Forum>();
+                todosPost = fdao.consultarTodos(forum);
+
+
+                request.setAttribute("posts", todosPost);
+                request.setAttribute("classy", classy);
+                request.getRequestDispatcher("adminForum.jsp").forward(request, response);
             } else if ("Excluir".equals(acao)) {
                 Forum forum = new Forum();
                 int id = Integer.parseInt(request.getParameter("id"));

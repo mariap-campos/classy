@@ -19,7 +19,7 @@ import util.ConectaBanco;
  */
 public class ForumDAO {
     public static final String INSERT = "insert into forum (postagem, assunto, admin_id, classy_token) values (?,?,?,?);";
-    public static final String SELECT = "select f.id, f.postagem, f.assunto, f.data_postagem, f.admin_id, f.classy_token, a.nome from forum as f join admin as a on f.admin_id = a.id where classy_token =?";
+    public static final String SELECT = "select f.id, f.postagem, f.assunto, f.data_postagem, f.admin_id, f.classy_token, a.nome from forum as f join admin as a on f.admin_id = a.id where classy_token =? order by data_postagem asc";
     public static final String DELETE = "DELETE FROM forum WHERE id=?";
     
     public void postar(Forum forum) {
