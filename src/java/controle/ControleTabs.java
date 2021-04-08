@@ -7,6 +7,7 @@ package controle;
 
 import dao.AdminDAO;
 import dao.ClassyDAO;
+import dao.ForumDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Admin;
 import modelo.Atividade;
 import modelo.Classy;
+import modelo.Forum;
 
 /**
  *
@@ -77,7 +79,26 @@ public class ControleTabs extends HttpServlet {
                     request.setAttribute("classy", classyBuscar);
                     request.setAttribute("atividades", todosAtividade);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
-                    System.out.println("Login Efetuado!");
+            } else if ("Forum".equals(acao)) {
+                Classy classyId = new Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                classyId.setToken(id);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
+                
+                Forum forum = new Forum();
+                forum.setClassy_token(id);
+                
+                ForumDAO fdao = new ForumDAO();
+                ArrayList<Forum> todosPost = new ArrayList<Forum>();
+                todosPost = fdao.consultarTodos(forum);
+
+
+                request.setAttribute("posts", todosPost);
+                request.setAttribute("classy", classy);
+                request.getRequestDispatcher("adminForum.jsp").forward(request, response);
             }
         }
     }

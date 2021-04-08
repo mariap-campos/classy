@@ -31,6 +31,10 @@
                 <input type="number" name="id" value="<%= classy %>">
                 <input id="listar" type="submit" name="acao" value="Todos">
             </form>
+            <form name="FEntrada" action="ControleTabs" method="POST" style="display: none;">
+                <input type="number" name="id" value="<%= classy %>">
+                <input id="listarForum" type="submit" name="acao" value="Forum">
+            </form>
         </div>
     </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -46,6 +50,10 @@
     <% } else if (request.getAttribute("tipo") == "Atividade") {%>
         window.onload = function() {
         setTimeout(function(){ $('#listar').click(); }, 3000)
+    }
+    <% } else if (request.getAttribute("tipo") == "Forum") {%>
+        window.onload = function() {
+        setTimeout(function(){ $('#listarForum').click(); }, 3000)
     }
     <% } else if (request.getAttribute("tipo") == "Voltar") {%>
         window.onload = function() {

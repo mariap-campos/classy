@@ -1,7 +1,6 @@
 
    
 $(function() {
-    console.log('ol');
     $("form[name='FEntrada']").validate({
         rules: {
 
@@ -13,6 +12,9 @@ $(function() {
         campoFinal: "required",
         campoMaterias: "required",
         txtNome: "required",
+        txtNomeAluno: "required",
+        txtRGM: "required",
+        txtPost: "required",
         txtDesc: "required",
         txtProfessor: "required",
         txtMateria: "required",
@@ -37,7 +39,10 @@ $(function() {
         campoFinal: "Por favor, informe a data de término do semestre.",
         campoMaterias: "Por favor, as matérias de sua turma.",
         txtNome: "Por favor, informe o nome da atividade.",
+        txtNomeAluno: "Por favor, informe o nome do aluno",
+        txtRGM: "Por favor, informe o id do aluno",
         txtDesc: "Por favor, descreva a atividade",
+        txtPost: "Você não pode postar uma mensagem vazia!",
         txtProfessor: "Por favor, informe o professor.",
         txtMateria: "Pro favor, informe a matéria",
         txtData: "Por favor, informe a data de entrega.",

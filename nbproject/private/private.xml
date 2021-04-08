@@ -3,22 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/success.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminAtividade.jsp</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminHome.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/dao/ClassyDAO.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleAtividade.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/success.css</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/classyForum.css</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminForum.jsp</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleTabs.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/atualizarClassy.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/signUp.html</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/novaAtividade.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/listarClassy.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/adminClassys.css</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/classys.css</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/atualizarAtividade.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleClassy.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/formValidate.js</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminForum.html</file>
         </group>
     </open-files>
 </project-private>

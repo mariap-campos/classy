@@ -89,7 +89,7 @@ public class ControleClassy extends HttpServlet {
                 
                 dao.ClassyDAO cdao = new dao.ClassyDAO();
                 cdao.cadastrar(classy);
-                System.out.println("Admin cadastrado com Sucesso!");
+                System.out.println("Classy cadastrado com Sucesso!");
                 
                 request.setAttribute("title", "Classy criado com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
@@ -145,6 +145,17 @@ public class ControleClassy extends HttpServlet {
                 request.setAttribute("materias", materias);
                 request.setAttribute("classy", classyBuscar);
                 request.getRequestDispatcher("novaAtividade.jsp").forward(request, response);
+            } else if ("Novo Aluno".equals(acao)) {
+                Classy classy = new modelo.Classy();
+                classy.setToken(Integer.parseInt(request.getParameter("id")));
+                
+                
+                dao.ClassyDAO cdao = new dao.ClassyDAO();
+                Classy classyBuscar = new Classy();
+                classyBuscar = cdao.consultarPorId(classy);
+                
+                request.setAttribute("classy", classyBuscar);
+                request.getRequestDispatcher("novoAluno.jsp").forward(request, response);
             } else if ("Apagar".equals(acao)) {
                 modelo.Classy classy = new modelo.Classy();
                 int id = Integer.parseInt(request.getParameter("id"));

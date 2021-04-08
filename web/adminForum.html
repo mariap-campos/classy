@@ -6,12 +6,11 @@
         <title>Classy.</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/styles/global.css">
-        <link rel="stylesheet" href="/styles/signup.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/classyForum.css">
-        <link rel="stylesheet" href="/styles/classys.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="src/styles/global.css">
+        <link rel="stylesheet" href="src/styles/signup.css">
+        <link rel="stylesheet" href="src/styles/form.css">
+        <link rel="stylesheet" href="src/styles/classyForum.css">
+        <link rel="stylesheet" href="src/styles/classys.css">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -26,19 +25,22 @@
                         <a href='home.html' class="register">Voltar</a>
                     </div>
                     <nav>
-                        <button >Home</button>
-                        <button>Atividades</button>
-                        <button>Provas</button>
-                        <button>Alunos</button>
-                        <button class="current">Fórum</button>
+                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                            <!--<input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">-->
+                            <input type="submit" name="acao" value="Home" class=" tabs">
+                            <input type="submit" name="acao" value="Atividades" class="tabs">
+                            <input type="submit" name="acao" value="Provas" class="tabs">
+                            <input type="submit" name="acao" value="Alunos" class="tabs">
+                            <input type="submit" name="acao" value="Forum" class="tabs current">
+                        </form>
                     </nav>
                 </header>
-                <form>
+                <form class="form">
                     <h4>Faça uma postagem no fórum!</h4>
                     <textarea name="txtDesc" placeholder="Descrição"></textarea>
                     <div class="input-double">
                         <input type="text" name="txtData" id="campoSenha" placeholder="Assunto">
-                        <input type="submit" value="Postar">
+                        <input type="submit" value="Postar" class="submit">
                     </div>
                 </form>
                 <ul> 

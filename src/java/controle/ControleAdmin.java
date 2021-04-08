@@ -99,7 +99,6 @@ public class ControleAdmin extends HttpServlet {
                     request.setAttribute("classys", todosClassys);
                     request.setAttribute("admin", adminLogado);
                     request.getRequestDispatcher("listarClassy.jsp").forward(request, response);
-                    System.out.println("Login Efetuado!");
                 } else {
                     request.setAttribute("title", "Usuário não existe ou está incorreto!");
                     request.setAttribute("mensagem", "Por favor, tente novamente.");

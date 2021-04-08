@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Admin;
 import modelo.Atividade;
 import modelo.Classy;
 import util.ConverteDate;
@@ -109,7 +106,6 @@ public class ControleAtividade extends HttpServlet {
                     
                     request.setAttribute("atividades", todosAtividade);
                     request.setAttribute("classy", classyBuscar);
-                    System.out.println("atividades " + todosAtividade);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("Atrasadas".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
@@ -129,7 +125,6 @@ public class ControleAtividade extends HttpServlet {
                     
                     request.setAttribute("atividades", todosAtividade);
                     request.setAttribute("classy", classyBuscar);
-                    System.out.println("atividades " + todosAtividade);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
@@ -151,7 +146,6 @@ public class ControleAtividade extends HttpServlet {
                     
                     request.setAttribute("atividades", todosAtividade);
                     request.setAttribute("classy", classyBuscar);
-                    System.out.println("atividades " + todosAtividade);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("abrirForm".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -202,6 +196,7 @@ public class ControleAtividade extends HttpServlet {
             } else if ("Apagar".equals(acao)) {
                 Atividade atividade = new Atividade();
                 int id = Integer.parseInt(request.getParameter("id"));
+                int id_classy = Integer.parseInt(request.getParameter("id_classy"));
                 
                 atividade.setId(id);
                 AtividadeDAO adao = new AtividadeDAO();
@@ -209,6 +204,7 @@ public class ControleAtividade extends HttpServlet {
                 
                 request.setAttribute("title", "Atividade apagada com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de suas atividades.");
+                request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Atividade");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
             }

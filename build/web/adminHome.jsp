@@ -43,7 +43,7 @@
                             <input type="submit" name="acao" value="Atividades" class="tabs">
                             <input type="submit" name="acao" value="Provas" class="tabs">
                             <input type="submit" name="acao" value="Alunos" class="tabs">
-                            <input type="submit" name="acao" value="Fórum" class="tabs">
+                            <input type="submit" name="acao" value="Forum" class="tabs">
                         </form>
                     </nav>
                 </header>

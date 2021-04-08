@@ -117,6 +117,7 @@
                             <div class="icons-box">
                                 <form name="FEntrada" action="ControleAtividade" method="POST">
                                     <input type="number" name="id" value="<%= a.getId() %>" style="display: none;">
+                                    <input type="number" name="id_classy" value="<%= classy.getToken() %>" style="display: none;">
                                     <button class="actions" type="submit" name="acao" value="Apagar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
                                     <button class="actions" type="submit" name="acao" value="abrirForm"><img class="icon" width="20" src="src/icons/edit-yellow.svg" alt="coração"></button>
                                 </form>
