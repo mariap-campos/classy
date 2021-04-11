@@ -50,8 +50,9 @@
                     </nav>
                 </header>
                 <div class="filters">
-                    <form name="FEntrada" action="ControleAtividade" method="POST">
+                    <form name="filtros" action="ControleProva" method="POST">
                         <p>Filtrar por matéria:</p>
+                        <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                         <select id="materias" name="txtMateria" placeholder="Matérias">
                             <option selected disabled hidden>Matérias</option>
                                 <%
@@ -89,10 +90,11 @@
                         </div>
                         <p><span><%= a.getData() %></span></p>
                         <div class="icons-box">
-                            <form name="FEntrada" action="ControleCompras" method="POST" class="options">
+                            <form name="optionsForm" action="ControleProva" method="POST" class="options">
                                 <input type="number" name="id" value="<%= a.getId() %>" style="display: none;">
+                                <input type="number" name="id_classy" value="<%= classy.getToken() %>" style="display: none;">
                                 <button class="actions" type="submit" name="acao" value="Apagar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
-                                <button class="actions" type="submit" name="acao" value="abrirAtualizar"><img class="icon" width="20" src="src/icons/edit-yellow.svg" alt="coração"></button>
+                                <button class="actions" type="submit" name="acao" value="abrirForm"><img class="icon" width="20" src="src/icons/edit-yellow.svg" alt="coração"></button>
                             </form>
                         </div>
                     </li>
@@ -100,12 +102,11 @@
                         }
                     %>
                 </ul>
-                </div>
+        </div>
                 <footer>
                     <p>O que é o <a href='/' class="classy">Classy.?</a></p>
                     <p><a href='/'>Termos de Uso</a></p>
                 </footer>
-        </div>
         <script src="" async defer></script>
     </body>
 </html>

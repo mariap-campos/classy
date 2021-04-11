@@ -5,12 +5,15 @@
  */
 package dao;
 
+import static dao.AtividadeDAO.SELECT_ID;
+import static dao.AtividadeDAO.UPDATE;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.Aluno;
+import modelo.Atividade;
 import util.ConectaBanco;
 
 /**
@@ -20,7 +23,9 @@ import util.ConectaBanco;
 public class AlunoDAO {
     public static final String INSERT = "insert into aluno (nome, rgm, situacao, classy_token) values (?,?,?,?);";
     public static final String SELECT = "SELECT * from aluno where classy_token=?";
+    public static final String SELECT_ID = "SELECT * from aluno where id=?";
     public static final String DELETE = "DELETE FROM aluno WHERE id=?";
+    public static final String UPDATE = "UPDATE aluno SET nome = ?, rgm = ?, situacao = ? WHERE id=?";
     
     public void cadastrar(Aluno aluno) {
         Connection conexao = null;
@@ -45,7 +50,7 @@ public class AlunoDAO {
         }
     } 
     
-        public ArrayList<Aluno> consultarTodos(Aluno aluno) {
+    public ArrayList<Aluno> consultarTodos(Aluno aluno) {
         Connection conexao = null;
         try {
             conexao = ConectaBanco.getConexao();
@@ -85,6 +90,59 @@ public class AlunoDAO {
             conexao = ConectaBanco.getConexao();
             PreparedStatement pstmt = conexao.prepareStatement(DELETE);
             pstmt.setInt(1, aluno.getId());
+            pstmt.execute();   
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    }
+    
+    public Aluno consultarPorId(Aluno aluno) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement comando = conexao.prepareStatement(SELECT_ID);
+            comando.setInt(1, aluno.getId());
+            ResultSet resultado = comando.executeQuery();
+            Aluno alunoResult = new Aluno();
+            while (resultado.next()){
+                alunoResult.setId(resultado.getInt("id"));
+                alunoResult.setNome(resultado.getString("nome"));
+                alunoResult.setRgm(resultado.getString("rgm")); 
+                alunoResult.setSituacao(resultado.getString("situacao")); 
+                alunoResult.setClassy_token(resultado.getInt("classy_token")); 
+            }  
+            
+            return alunoResult;
+          
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    }
+    
+    public void atualizar(Aluno aluno) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(UPDATE);
+            pstmt.setString(1, aluno.getNome());
+            pstmt.setString(2, aluno.getRgm());
+            pstmt.setString(3, aluno.getSituacao());
+            pstmt.setInt(4, aluno.getId());
+
             pstmt.execute();   
         } catch (Exception e){
             throw new RuntimeException(e);

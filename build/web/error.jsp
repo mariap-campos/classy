@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/home.css">
-        <link rel="stylesheet" href="src/styles/success.css?v=3">
+        <link rel="stylesheet" href="src/styles/success.css?v=4">
 
     </head>
     <body>

@@ -5,11 +5,13 @@
  */
 package controle;
 
+import dao.ClassyDAO;
 import dao.ProvaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -18,7 +20,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Prova;
+import modelo.Classy;
+import modelo.Prova;
 import util.ConverteDate;
+import util.SeparateSubject;
 
 /**
  *
@@ -63,7 +68,105 @@ public class ControleProva extends HttpServlet {
                 request.setAttribute("mensagem", "Clique na aba 'Provas' para ver todas as provas marcadas.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
-            } 
+            } else if ("Apagar".equals(acao)) {
+                Prova prova = new Prova();
+                int id = Integer.parseInt(request.getParameter("id"));
+                int id_classy = Integer.parseInt(request.getParameter("id_classy"));
+                
+                prova.setId(id);
+                ProvaDAO adao = new ProvaDAO();
+                adao.apagar(prova);     
+                
+                request.setAttribute("title", "Prova apagada com sucesso!");
+                request.setAttribute("mensagem", "Voltando a página de listagem de suas provas.");
+                request.setAttribute("classy", id_classy);
+                request.setAttribute("tipo", "Prova");
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            } else if ("abrirForm".equals(acao)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+          
+                Prova prova = new Prova();
+                prova.setId(id);
+                
+                dao.ProvaDAO cdao = new dao.ProvaDAO();
+                Prova provaBuscar = new Prova();
+                provaBuscar = cdao.consultarPorId(prova);
+
+                
+                Classy classy = new Classy();    
+                classy.setToken(provaBuscar.getToken_classy());
+                ClassyDAO cldao = new ClassyDAO();
+                Classy classyBuscar = cldao.consultarPorId(classy);
+                
+                SeparateSubject separator = new SeparateSubject();    
+                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
+                   
+                request.setAttribute("prova", provaBuscar);
+                request.setAttribute("materias", materias);
+                request.getRequestDispatcher("atualizarProva.jsp").forward(request, response);
+            } else if ("Atualizar".equals(acao)) {
+                Prova prova = new Prova();
+                int id = Integer.parseInt(request.getParameter("id"));
+                int id_classy = Integer.parseInt(request.getParameter("id_classy"));
+                
+                prova.setId(id);
+                prova.setNome(request.getParameter("txtNomeProva"));
+                prova.setMateria(request.getParameter("txtMateria"));
+                
+                ConverteDate conversor = new ConverteDate();
+                Date data1 = conversor.getDate(request.getParameter("txtDataProva"));
+               
+                prova.setData(data1);
+                
+                ProvaDAO cdao = new ProvaDAO();
+                cdao.atualizar(prova);
+                
+                request.setAttribute("title", "Informações da prova atualizadas!");
+                request.setAttribute("mensagem", "Voltando a página de listagem.");
+                request.setAttribute("classy", id_classy);
+                request.setAttribute("tipo", "Prova");
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            }  else if ("Filtrar".equals(acao)) {
+                    int classy_token = Integer.parseInt(request.getParameter("id"));
+                    
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
+                    
+                    Prova prova = new Prova();
+                    prova.setToken_classy(classy_token);
+                    prova.setMateria(request.getParameter("txtMateria"));
+                
+                    ProvaDAO cdao = new ProvaDAO();
+                    ArrayList<Prova> todosProva = new ArrayList<Prova>();
+                    todosProva = cdao.consultarPorMateria(prova);
+                    
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
+                    request.setAttribute("provas", todosProva);
+                    request.setAttribute("classy", classyBuscar);
+                    request.getRequestDispatcher("adminProva.jsp").forward(request, response);
+            } else if ("Todos".equals(acao)) {
+                    int classy_token = Integer.parseInt(request.getParameter("id"));
+                    Classy classy = new Classy();
+                    classy.setToken(classy_token);
+                    
+                    Prova prova = new Prova();
+                    prova.setToken_classy(classy_token);
+                
+                    ProvaDAO cdao = new ProvaDAO();
+                    ArrayList<Prova> todosProva = new ArrayList<Prova>();
+                    todosProva = cdao.consultarTodos(prova);
+                    
+                    ClassyDAO dao = new ClassyDAO();
+                    Classy classyBuscar = new Classy();
+                    classyBuscar = dao.consultarPorId(classy);
+                    
+                    request.setAttribute("provas", todosProva);
+                    request.setAttribute("classy", classyBuscar);
+                    request.getRequestDispatcher("adminProva.jsp").forward(request, response);
+            }
         }
     }
 

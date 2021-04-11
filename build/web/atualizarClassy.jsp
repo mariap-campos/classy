@@ -38,7 +38,7 @@
                         <input type="text" name="campoClassy" id="campoClassy" placeholder="Nome do Classy" value="<%= classy.getNome() %>">
                         <input type="text" name="campoInsti" id="campoInsti" placeholder="Nome da Instituição" value="<%= classy.getNome_instituicao() %>" >
                         <p>Separe o nome das matéria utilizando ponto e vírgula <span>(exemplo: "Matemática;Física")</span></p>
-                        <textarea name="campoMaterias" id="campoMaterias" placeholder="Matérias" value="<%= classy.getMaterias() %>"> <%= classy.getMaterias() %></textarea>
+                        <textarea name="campoMaterias" id="campoMaterias" placeholder="Matérias" value="<%= classy.getMaterias() %>"><%= classy.getMaterias() %></textarea>
                         <div class="label-double">
                             <label>Ínicio do Semestre</label>
                             <label>Final do Semestre</label>

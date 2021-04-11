@@ -20,6 +20,7 @@ public class AdminDAO {
     
     public static final String INSERT = "INSERT INTO admin (nome, usuario, senha, email) values (?,?,?,?)";
     public static final String SELECT_ID = "SELECT * from admin where id=?";
+    public static final String SELECT_USER = "SELECT * from admin where usuario=?";
     
     public void cadastrar(Admin admin) {
         Connection conexao = null;
@@ -41,7 +42,33 @@ public class AdminDAO {
                 throw new RuntimeException(el);
             }
         }
-    }   
+    }
+    
+    public boolean getUsuario(Admin admin) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(SELECT_USER);
+            pstmt.setString(1, admin.getUsuario());
+            ResultSet resultado = pstmt.executeQuery();
+            
+            if (resultado.next() == false) { 
+                return false;
+            } else { return true;}
+                
+            
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    } 
+    
     
     public Admin getId(Admin admin) {
         Connection conexao = null;

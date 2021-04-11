@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
         <link rel="stylesheet" href="src/styles/form.css">
-        <link rel="stylesheet" href="src/styles/classysAluno.css?v=3">
+        <link rel="stylesheet" href="src/styles/classysAluno.css?v=4">
         <link rel="stylesheet" href="src/styles/classys.css">
         <link rel="stylesheet" href="src/styles/filters.css">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@
                     </nav>
                 </header>
                 <div class="alunos-container">
-                    <p class="number">Mostrando 20 alunos</p>
+<!--                    <p class="number">Mostrando 20 alunos</p>-->
                     <%
                         if (listaAlunos.isEmpty()) {
                     %>

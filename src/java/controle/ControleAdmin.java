@@ -48,32 +48,52 @@ public class ControleAdmin extends HttpServlet {
                 admin.setEmail(request.getParameter("campoEmail"));
                 
                 AdminDAO adao = new AdminDAO();
-                adao.cadastrar(admin);
-                Admin adminId = new Admin();
-                adminId = adao.getId(admin);
-                
-                modelo.Classy classy = new modelo.Classy();
-                classy.setNome(request.getParameter("campoClassy"));
-                classy.setNome_instituicao(request.getParameter("campoInsti"));
-                classy.setId_admin(adminId.getId());
-                
-                ConverteDate conversor = new ConverteDate();
-                Date data1 = conversor.getDate(request.getParameter("campoInicio"));
-                Date data2 = conversor.getDate(request.getParameter("campoFinal"));
-               
-                classy.setData_inicio(data1);
-                classy.setData_final(data2);
-                
-                classy.setMaterias(request.getParameter("campoMaterias"));
-                
-                dao.ClassyDAO cdao = new dao.ClassyDAO();
-                cdao.cadastrar(classy);
-                System.out.println("Admin cadastrado com Sucesso!");
-                
-                request.setAttribute("title", "Seu cadastro foi realizado com sucesso!");
-                request.setAttribute("mensagem", "Voltando a página inicial para que você possa efetuar o login!");
-                request.setAttribute("tipo", "Cadastrar");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                try {
+                    
+                    if (adao.getUsuario(admin)) {
+                        
+                    request.setAttribute("title", "O usuário <span>" + admin.getUsuario() + "</span> já existe!");
+                    request.setAttribute("mensagem", "Por favor, escolha outro usuário");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    
+                    } else {
+                        
+                    adao.cadastrar(admin);
+                    Admin adminId = new Admin();
+                    adminId = adao.getId(admin);
+
+                    modelo.Classy classy = new modelo.Classy();
+                    classy.setNome(request.getParameter("campoClassy"));
+                    classy.setNome_instituicao(request.getParameter("campoInsti"));
+                    classy.setId_admin(adminId.getId());
+
+                    ConverteDate conversor = new ConverteDate();
+                    Date data1 = conversor.getDate(request.getParameter("campoInicio"));
+                    Date data2 = conversor.getDate(request.getParameter("campoFinal"));
+
+                    classy.setData_inicio(data1);
+                    classy.setData_final(data2);
+
+                    classy.setMaterias(request.getParameter("campoMaterias"));
+
+                    dao.ClassyDAO cdao = new dao.ClassyDAO();
+                    cdao.cadastrar(classy);
+                    System.out.println("Admin cadastrado com Sucesso!");
+
+                    request.setAttribute("title", "Seu cadastro foi realizado com sucesso!");
+                    request.setAttribute("mensagem", "Voltando a página inicial para que você possa efetuar o login!");
+                    request.setAttribute("tipo", "Cadastrar");
+                    request.getRequestDispatcher("success.jsp").forward(request, response);
+                    
+                    }
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             }  else if ("Entrar".equals(acao)) {
                 modelo.Admin admin = new modelo.Admin();
                 admin.setUsuario(request.getParameter("campoUsuario"));
@@ -106,7 +126,7 @@ public class ControleAdmin extends HttpServlet {
             }
         } catch (Exception e) {
             System.out.println(e);
-            request.setAttribute("erro", e);
+            request.setAttribute("ERROOOOOOOOOO", e);
         }
     }
 

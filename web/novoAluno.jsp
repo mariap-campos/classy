@@ -1,8 +1,4 @@
-<%-- 
-    Document   : novaAtividade
-    Created on : 02/04/2021, 14:24:33
-    Author     : Maria Paula
---%>
+
 
 <%@page import="modelo.Classy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

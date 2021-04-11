@@ -39,6 +39,10 @@
                 <input type="number" name="id" value="<%= classy %>">
                 <input id="listarAluno" type="submit" name="acao" value="Alunos">
             </form>
+            <form name="FEntrada" action="ControleTabs" method="POST" style="display: none;">
+                <input type="number" name="id" value="<%= classy %>">
+                <input id="listarProva" type="submit" name="acao" value="Provas">
+            </form>
         </div>
     </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -59,7 +63,11 @@
         window.onload = function() {
         setTimeout(function(){ $('#listarForum').click(); }, 3000)
     }
-        <% } else if (request.getAttribute("tipo") == "Aluno") {%>
+    <% } else if (request.getAttribute("tipo") == "Prova") {%>
+        window.onload = function() {
+        setTimeout(function(){ $('#listarProva').click(); }, 3000)
+    }
+     <% } else if (request.getAttribute("tipo") == "Aluno") {%>
         window.onload = function() {
         setTimeout(function(){ $('#listarAluno').click(); }, 3000)
     }

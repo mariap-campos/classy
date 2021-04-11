@@ -1,6 +1,6 @@
 .alunos-container {
     width: 50%;
-    margin: 0 auto;
+    margin: 40px auto;
         animation-name: slide;
     animation-duration: 1.2s;
     animation-timing-function: ease;

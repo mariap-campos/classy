@@ -3,11 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminAtividade.jsp</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminHome.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/styles/classyForum.css</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/jquery.password-validation.js</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/util/SeparateSubject.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleAtividade.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/modelo/Atividade.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/modelo/Aluno.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/dao/AlunoDAO.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/util/ConverteDate.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/novaAtividade.jsp</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/teste/CadastrarClassy.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/validatePassword.js</file>
             <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminForum.jsp</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleTabs.java</file>
-            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/adminForum.html</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/dao/AtividadeDAO.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/src/java/controle/ControleAdmin.java</file>
+            <file>file:/C:/Users/Maria%20Paula/Documents/UNIVERSIDADE/4º%20Semestre/Aplicações%20Web/Classy/web/src/js/formValidate.js</file>
         </group>
     </open-files>
 </project-private>
