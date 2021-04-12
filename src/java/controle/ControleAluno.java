@@ -5,25 +5,20 @@
  */
 package controle;
 
+import dao.AdminDAO;
 import dao.AlunoDAO;
-import dao.ProvaDAO;
 import dao.ClassyDAO;
-import dao.ForumDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Admin;
 import modelo.Aluno;
-import modelo.Prova;
 import modelo.Classy;
-import modelo.Forum;
-import util.ConverteDate;
-import util.SeparateSubject;
 
 /**
  *
@@ -52,14 +47,31 @@ public class ControleAluno extends HttpServlet {
                 aluno.setNome(request.getParameter("txtNomeAluno"));
                 aluno.setRgm(request.getParameter("txtRGM"));
                 aluno.setClassy_token(classy_token);
-               
                 AlunoDAO adao = new AlunoDAO();
-                adao.cadastrar(aluno);
                 
-                request.setAttribute("title", "Aluno adicionado com sucesso!");
-                request.setAttribute("mensagem", "Clique na aba 'Alunos' para ver todos os alunos dessa turma");
-                request.setAttribute("tipo", "Listar");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                if (adao.getRGM(aluno)) {              
+                    request.setAttribute("title", "O aluno com id <span>" + aluno.getRgm() + "</span> já existe!");
+                    request.setAttribute("mensagem", "Por favor, escolha outro id.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+        
+                } else { 
+                    try {
+                        
+                    adao.cadastrar(aluno);
+                    request.setAttribute("title", "Aluno adicionado com sucesso!");
+                    request.setAttribute("mensagem", "Clique na aba 'Alunos' para ver todos os alunos dessa turma");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("success.jsp").forward(request, response);
+                    
+                    } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                }
             } else if ("Apagar".equals(acao)) {
                 Aluno aluno = new Aluno();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -67,6 +79,8 @@ public class ControleAluno extends HttpServlet {
                 
                 aluno.setId(id);
                 AlunoDAO adao = new AlunoDAO();
+                
+                try {
                 adao.apagar(aluno);     
                 
                 request.setAttribute("title", "Aluno apagado com sucesso!");
@@ -74,6 +88,14 @@ public class ControleAluno extends HttpServlet {
                 request.setAttribute("classy", classy_id);
                 request.setAttribute("tipo", "Aluno");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar a exclusão no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
             } else if ("abrirForm".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
           
@@ -98,6 +120,8 @@ public class ControleAluno extends HttpServlet {
                
                 
                 AlunoDAO cdao = new AlunoDAO();
+                
+                try {
                 cdao.atualizar(aluno);
                 
                 request.setAttribute("title", "Informações do aluno atualizadas!");
@@ -105,6 +129,42 @@ public class ControleAluno extends HttpServlet {
                 request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Aluno");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+            }  else if ("Entrar".equals(acao)) {
+                Aluno aluno = new Aluno();
+                aluno.setRgm(request.getParameter("campoRGM"));
+                
+                AlunoDAO adao = new AlunoDAO(); 
+                Aluno alunoLogado = adao.efetuarLogin(aluno); 
+                System.out.println(alunoLogado.getNome());
+                
+                if (aluno.getRgm().equals(alunoLogado.getRgm())) {
+                    
+                    Aluno alunoId = new Aluno();
+                    alunoId = adao.getId(alunoLogado);
+                    
+                    ClassyDAO cdao = new ClassyDAO();
+                    Classy classy = new Classy();
+                    classy.setToken(alunoLogado.getClassy_token());
+                    Classy classyBuscar = cdao.consultarPorId(classy);
+                   
+                   
+                    request.setAttribute("aluno", alunoLogado);
+                    request.setAttribute("classy", classyBuscar);
+                    request.getRequestDispatcher("userHome.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("title", "Usuário não existe ou está incorreto!");
+                    request.setAttribute("mensagem", "Por favor, tente novamente.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);;
+                }
             }
         } catch (Exception e) {
             System.out.println(e);

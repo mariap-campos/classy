@@ -26,7 +26,7 @@
                             <p>Bem vindo ao</p>
                             <h2>Classy.</h2>
                         </div>
-                        <a href='/Classy/' class="register">Voltar</a>
+                        <a class="register back">Voltar</a>
                     </div>
                 </header>
                 <div class="content">
@@ -58,5 +58,10 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
         <script src="src/js/formValidate.js"></script>
+        <script>
+            $(".back").click(function() {
+                history.back();
+              });
+        </script>
     </body>
 </html>

@@ -32,7 +32,7 @@
     }
     <% } else if (request.getAttribute("tipo") == "Listar") {%>
         window.onload = function() {
-        setTimeout(function(){ history.back(-2) }, 3000)
+        setTimeout(function(){ history.back(-2) }, 4000)
     }
     <% }%>
     </script>

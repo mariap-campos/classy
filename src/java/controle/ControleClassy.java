@@ -7,12 +7,14 @@ package controle;
 
 import dao.AdminDAO;
 import dao.ClassyDAO;
+import dao.ForumDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Admin;
 import modelo.Classy;
+import modelo.Forum;
 import util.ConverteDate;
 import util.SeparateSubject;
 
@@ -88,13 +91,21 @@ public class ControleClassy extends HttpServlet {
                 classy.setMaterias(request.getParameter("campoMaterias"));
                 
                 dao.ClassyDAO cdao = new dao.ClassyDAO();
-                cdao.cadastrar(classy);
-                System.out.println("Classy cadastrado com Sucesso!");
                 
+                try {
+                cdao.cadastrar(classy);
                 request.setAttribute("title", "Classy criado com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             } else if ("abrirAtualizar".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
           
@@ -124,12 +135,20 @@ public class ControleClassy extends HttpServlet {
                 classy.setData_final(data2);
                 
                 dao.ClassyDAO cdao = new dao.ClassyDAO();
-                cdao.atualizar(classy);
                 
+                try {
+                cdao.atualizar(classy);
                 request.setAttribute("title", "Informações do Classy atualizado!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
                 request.setAttribute("tipo", "Listar");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             } else if ("Nova Atividade".equals(acao)) {
                 modelo.Classy classy = new modelo.Classy();
                 classy.setToken(Integer.parseInt(request.getParameter("id")));
@@ -188,18 +207,47 @@ public class ControleClassy extends HttpServlet {
                 Date agora = conversor.getDate(dtf.format(now));
                 
                 if (agora.after(data_final)) {
+                    
+                    try {
                     cdao.apagar(classy);                
                     request.setAttribute("title", "Classy apagado com sucesso!");
                     request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
                     request.setAttribute("tipo", "Listar");
                     request.getRequestDispatcher("success.jsp").forward(request, response);
+                    } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para excluir o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
                 } else {
                    request.setAttribute("title", "O semestre desse classy ainda não acabou!");
                     request.setAttribute("mensagem", "Se deseja apagá-lo. Favor ajustar data de fim de semestre.");
                     request.setAttribute("tipo", "Listar");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
-            }
+            } else if ("Publicar no Forum".equals(acao)) {
+                Classy classyId = new Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                classyId.setToken(id);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
+                
+                Forum forum = new Forum();
+                forum.setClassy_token(id);
+                
+                ForumDAO fdao = new ForumDAO();
+                ArrayList<Forum> todosPost = new ArrayList<Forum>();
+                todosPost = fdao.consultarTodos(forum);
+
+
+                request.setAttribute("posts", todosPost);
+                request.setAttribute("classy", classy);
+                request.getRequestDispatcher("adminForum.jsp").forward(request, response);
+            } 
         } catch (Exception e) {
             System.out.println(e);
 //            request.setAttribute("erro", e);

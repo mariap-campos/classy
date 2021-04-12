@@ -1,0 +1,45 @@
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    background-color: var(--back);
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.title {
+    background: transparent!important;
+    font-size: 14px!important;
+    margin-bottom: 0px!important;
+}
+
+.subject {
+    font-weight: 500;
+    color: var(--darkblue);
+    margin: 0;
+}
+
+.data {
+    background: var(--blue);
+    color: white;
+    margin: 0 auto;
+    display: inline;
+    padding: 3px;
+    border-radius: 6px;
+    font-size: 12px;
+    display: flex;
+    align-self: center;
+}
+
+li.prova .subject {
+    color: var(--darkyellow);
+}
+
+li.prova .data {
+    background: var(--yellow);
+}

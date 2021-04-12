@@ -33,7 +33,6 @@
                             <h3><%= classy.getNome() %></h3>
                             <p><%= classy.getNome_instituicao() %></p>
                         </div>
-                        <a href='/Classy/' id="goBack" class="register">Sair</a>
                     </div>
                     <nav>
                         <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >

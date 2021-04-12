@@ -29,6 +29,7 @@
          <% 
             ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>) request.getAttribute("alunos");
             Classy classy = (Classy) request.getAttribute("classy");
+            Aluno aluno = (Aluno) request.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">
@@ -39,12 +40,13 @@
                             <p><%= classy.getNome_instituicao() %></p>
                         </div> 
                     </div>
-                    <nav>
-                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                     <nav>
+                        <form name="alunoAtividade" action="ControleTabsUser" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
-                            <input type="submit" name="acao" value="Home" class="tabs ">
+                            <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
+                            <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
-                            <input type="submit" name="acao" value="Provas" class="tabs">
+                            <input type="submit" name="acao" value="Provas" class="tabs ">
                             <input type="submit" name="acao" value="Alunos" class="tabs current">
                             <input type="submit" name="acao" value="Forum" class="tabs">
                         </form>
@@ -64,7 +66,6 @@
                     <table>
                         <tr>
                           <th>Aluno</th>
-                          <th>Id</th>
                           <th>Situação</th>
                         </tr>
                         <%
@@ -72,16 +73,7 @@
                         %>   
                         <tr>
                             <td><%= a.getNome() %></td>
-                            <td><%= a.getRgm() %></td>
                             <td><%= a.getSituacao() %></td>
-                            <td>
-                                <form name="adminAluno" action="ControleAluno" method="POST">
-                                    <input type="number" name="id" value="<%= a.getId() %>" style="display: none;">
-                                    <input type="number" name="classy_id" value="<%= classy.getToken() %>" style="display: none;">
-                                    <button class="actions" type="submit" name="acao" value="Apagar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
-                                    <button class="actions" type="submit" name="acao" value="abrirForm"><img class="icon" width="20" src="src/icons/edit-yellow.svg" alt="coração"></button>
-                                </form>
-                            </td>
                         </tr>
                         <%
                         }

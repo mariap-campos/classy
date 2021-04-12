@@ -5,7 +5,6 @@
  */
 package controle;
 
-import dao.AdminDAO;
 import dao.AlunoDAO;
 import dao.ClassyDAO;
 import dao.ForumDAO;
@@ -18,7 +17,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Admin;
 import modelo.Aluno;
 import modelo.Atividade;
 import modelo.Classy;
@@ -29,8 +27,8 @@ import modelo.Prova;
  *
  * @author Maria Paula
  */
-@WebServlet(name = "ControleTabs", urlPatterns = {"/ControleTabs"})
-public class ControleTabs extends HttpServlet {
+@WebServlet(name = "ControleTabsUser", urlPatterns = {"/ControleTabsUser"})
+public class ControleTabsUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,23 +47,25 @@ public class ControleTabs extends HttpServlet {
             if ("Home".equals(acao)) {
                 Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
+                int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
                 classyId.setToken(id);
                 
                 ClassyDAO cdao = new ClassyDAO();
                 Classy classy = new Classy();
                 classy = cdao.consultarPorId(classyId); 
                 
-                AdminDAO adao = new AdminDAO();
-                Admin adminId = new Admin();
-                adminId.setId(classy.getId_admin());
+                AlunoDAO adao = new AlunoDAO();
+                Aluno alunoId = new Aluno();
+                alunoId.setId(id_aluno);
                 
-                Admin admin = adao.consultarPorId(adminId);
+                Aluno aluno = adao.consultarPorId(alunoId);
                 
                 request.setAttribute("classy", classy);
-                request.setAttribute("admin", admin);
-                request.getRequestDispatcher("adminHome.jsp").forward(request, response);
+                request.setAttribute("aluno", aluno);
+                request.getRequestDispatcher("userHome.jsp").forward(request, response);
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
+                    int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
                     Classy classy = new Classy();
                     classy.setToken(classy_token);
                     
@@ -80,53 +80,21 @@ public class ControleTabs extends HttpServlet {
                     Classy classyBuscar = new Classy();
                     classyBuscar = cdao.consultarPorId(classy);
                     
+                    AlunoDAO aldao = new AlunoDAO();
+                    Aluno alunoId = new Aluno();
+                    alunoId.setId(id_aluno);
+
+                    Aluno aluno = aldao.consultarPorId(alunoId);
+                    
                     request.setAttribute("classy", classyBuscar);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("isAdmin", true);
-                    request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
-            } else if ("Forum".equals(acao)) {
+                    request.setAttribute("aluno", aluno);
+                    request.setAttribute("isAdmin", "false");
+                    request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
+            }  else if ("Provas".equals(acao)) {
                 Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
-                
-                Forum forum = new Forum();
-                forum.setClassy_token(id);
-                
-                ForumDAO fdao = new ForumDAO();
-                ArrayList<Forum> todosPost = new ArrayList<Forum>();
-                todosPost = fdao.consultarTodos(forum);
-
-
-                request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
-                request.getRequestDispatcher("adminForum.jsp").forward(request, response);
-            } else if ("Alunos".equals(acao)) {
-                Classy classyId = new Classy();
-                int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
-                
-                Aluno forum = new Aluno();
-                forum.setClassy_token(id);
-                
-                AlunoDAO fdao = new AlunoDAO();
-                ArrayList<Aluno> todosAlunos = new ArrayList<Aluno>();
-                todosAlunos = fdao.consultarTodos(forum);
-
-
-                request.setAttribute("alunos", todosAlunos);
-                request.setAttribute("classy", classy);
-                request.getRequestDispatcher("adminAluno.jsp").forward(request, response);
-            } else if ("Provas".equals(acao)) {
-                Classy classyId = new Classy();
-                int id = Integer.parseInt(request.getParameter("id"));
+                int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
                 classyId.setToken(id);
                 
                 ClassyDAO cdao = new ClassyDAO();
@@ -139,15 +107,69 @@ public class ControleTabs extends HttpServlet {
                 ProvaDAO fdao = new ProvaDAO();
                 ArrayList<Prova> todosProva = new ArrayList<Prova>();
                 todosProva = fdao.consultarTodos(prova);
-
+                
+                AlunoDAO aldao = new AlunoDAO();
+                Aluno alunoId = new Aluno();
+                alunoId.setId(id_aluno);
+                Aluno aluno = aldao.consultarPorId(alunoId);
 
                 request.setAttribute("provas", todosProva);
                 request.setAttribute("classy", classy);
-                request.getRequestDispatcher("adminProva.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-            request.setAttribute("erro", e);
+                request.setAttribute("aluno", aluno);
+                request.getRequestDispatcher("userProva.jsp").forward(request, response);
+            } else if ("Alunos".equals(acao)) {
+                Classy classyId = new Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
+                classyId.setToken(id);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
+                
+                Aluno forum = new Aluno();
+                forum.setClassy_token(id);
+                
+                AlunoDAO fdao = new AlunoDAO();
+                ArrayList<Aluno> todosAlunos = new ArrayList<Aluno>();
+                todosAlunos = fdao.consultarTodos(forum);
+                
+                Aluno alunoId = new Aluno();
+                alunoId.setId(id_aluno);
+                Aluno aluno = fdao.consultarPorId(alunoId);
+                
+                request.setAttribute("alunos", todosAlunos);
+                request.setAttribute("classy", classy);
+                request.setAttribute("aluno", aluno);
+                request.getRequestDispatcher("userAlunos.jsp").forward(request, response);
+            } else if ("Forum".equals(acao)) {
+                Classy classyId = new Classy();
+                int id = Integer.parseInt(request.getParameter("id"));
+                int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
+                classyId.setToken(id);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classy = new Classy();
+                classy = cdao.consultarPorId(classyId); 
+                
+                Forum forum = new Forum();
+                forum.setClassy_token(id);
+                
+                ForumDAO fdao = new ForumDAO();
+                ArrayList<Forum> todosPost = new ArrayList<Forum>();
+                todosPost = fdao.consultarTodos(forum);
+                
+                AlunoDAO aldao = new AlunoDAO();
+                Aluno alunoId = new Aluno();
+                alunoId.setId(id_aluno);
+                Aluno aluno = aldao.consultarPorId(alunoId);
+
+
+                request.setAttribute("posts", todosPost);
+                request.setAttribute("classy", classy);
+                request.setAttribute("aluno", aluno);
+                request.getRequestDispatcher("userForum.jsp").forward(request, response);
+            } 
         }
     }
 

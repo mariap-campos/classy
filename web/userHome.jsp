@@ -1,11 +1,11 @@
 <%-- 
-    Document   : adminHome
-    Created on : 01/04/2021, 22:01:39
+    Document   : userHome
+    Created on : 11/04/2021, 17:25:55
     Author     : Maria Paula
 --%>
 
+<%@page import="modelo.Aluno"%>
 <%@page import="modelo.Classy"%>
-<%@page import="modelo.Admin"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,12 +18,13 @@
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
         <link rel="stylesheet" href="src/styles/classys.css?v=3">
+        <link rel="stylesheet" href="src/styles/userHome.css">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
         <% 
             Classy classy = (Classy) request.getAttribute("classy");
-            Admin admin = (Admin) request.getAttribute("admin");
+            Aluno aluno = (Aluno) request.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">
@@ -33,15 +34,13 @@
                             <h3><%= classy.getNome() %></h3>
                             <p><%= classy.getNome_instituicao() %></p>
                         </div>
-                        <form name="voltar" action="ControleAdmin" method="POST" class="list-classy">
-                            <input type="number" name="id" value="<%= admin.getId() %>" style="display: none;">
-                            <input class="register" id="goBack" type="submit" name="acao" value="Voltar ao menu" class="tabs">
-                        </form> 
+                        <a class="register" href="/Classy/">Sair</a>
                           
                     </div>
                     <nav>
-                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                        <form name="adminAtividade" action="ControleTabsUser" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
+                            <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
                             <input type="submit" name="acao" value="Provas" class="tabs">
@@ -51,21 +50,48 @@
                     </nav>
                 </header>
                 <div class="classy-box">
-                    <h3>Bem vindo, <%= admin.getNome() %>!</h3>
+                    <h3>Bem vindo, <%= aluno.getNome() %>!</h3>
                     <div class="line"></div>
                     <div class="classy-flex">
                         <div class="classy-header">
                             <p>O que deseja fazer?</p>
-                            <img src="src/images/hero-img3.png" class="img" alt="Meeting">
+                            <img src="src/images/hero-img4.png" class="img" alt="Meeting">
                         </div>
                         <div class="classy-options">
-                            <form name="adminAtividade" name="FEntrada" action="ControleClassy" method="POST" >
-                                <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
-                                <input class="options" type="submit" name="acao" value="Nova Atividade">
-                                <input class="options" type="submit" name="acao" value="Nova Prova">
-                                <input class="options" type="submit" name="acao" value="Novo Aluno">
-                                <input class="options" type="submit" name="acao" value="Publicar no Forum"> 
-                            </form>
+                            <ul class="atividades">
+                                <h3>Próximas Atividades</h3>
+                                <li class="atividade-item">
+                                    <div class="infos">
+                                        <h3 class="title">Atividade 2 </h3>
+                                        <p class="subject">Banco de Dados</p>
+                                    </div>
+                                    <div class="data">02/03/2021</div>
+                                </li>
+                                <li class="atividade-item">
+                                    <div class="infos">
+                                        <h3 class="title">Atividade 2 </h3>
+                                        <p class="subject">Banco de Dados</p>
+                                    </div>
+                                    <div class="data">02/03/2021</div>
+                                </li>
+                            </ul>
+                            <ul class="provas">
+                                <h3>Próximas Provas</h3>
+                                <li class="atividade-item prova">
+                                    <div class="infos">
+                                        <h3 class="title">P1 </h3>
+                                        <p class="subject">Banco de Dados</p>
+                                    </div>
+                                    <div class="data">02/03/2021</div>
+                                </li>
+                                <li class="atividade-item prova">
+                                    <div class="infos">
+                                        <h3 class="title">Simulado </h3>
+                                        <p class="subject">Banco de Dados</p>
+                                    </div>
+                                    <div class="data">02/03/2021</div>
+                                </li>
+                            </ul>
                     </div>
                 </div>
                 </div>

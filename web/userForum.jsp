@@ -4,6 +4,7 @@
     Author     : Maria Paula
 --%>
 
+<%@page import="modelo.Aluno"%>
 <%@page import="modelo.Forum"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Classy"%>
@@ -27,6 +28,7 @@
         <% 
             Classy classy = (Classy) request.getAttribute("classy");
             ArrayList<Forum> listaPosts = (ArrayList<Forum>) request.getAttribute("posts");
+            Aluno aluno = (Aluno) request.getAttribute("aluno");
         %>
         <div class="container">
             <header class="header">
@@ -37,12 +39,13 @@
                             <p><%= classy.getNome_instituicao() %></p>
                         </div>
                     </div>
-                    <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                     <nav>
+                        <form name="alunoAtividade" action="ControleTabsUser" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
+                            <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
-                            <input type="submit" name="acao" value="Provas" class="tabs">
+                            <input type="submit" name="acao" value="Provas" class="tabs ">
                             <input type="submit" name="acao" value="Alunos" class="tabs">
                             <input type="submit" name="acao" value="Forum" class="tabs current">
                         </form>
@@ -51,11 +54,11 @@
             <form name="FEntrada" accept-charset="ISO-8859-1" class="post form" action="ControleForum" method="POST">
                     <h4>Faça uma postagem no fórum!</h4>
                     <input type="number" name="id_classy" value="<%= classy.getToken() %>" style="display: none;">
-                    <input type="number" name="id" value="<%= classy.getId_admin() %>" style="display: none;">
+                    <input type="number" name="id" value="<%= aluno.getId() %>" style="display: none;">
                     <textarea name="txtPost" placeholder="Escreva sua mensagem aqui..."></textarea>
                     <div class="input-double">
                         <input type="text" name="txtAssunto" id="campoSenha" placeholder="Assunto">
-                        <input type="submit" name="acao"  value="Postar" class="submit">
+                        <input type="submit" name="acao"  value="Publicar" class="submit">
                     </div>
             </form>
             <ul> 
@@ -84,11 +87,18 @@
                             <p><%= f.getPostagem() %></p>
                             <p class="date"> Postado em: <%= f.getData_postagem() %></p>
                             <div class="icons-box">
+                            <% 
+                                 if(f.getUser_id() == aluno.getId()) {
+                            %>
                             <form name="FApagar" action="ControleForum" method="POST">
                                     <input type="number" name="id" value="<%= f.getId() %>" style="display: none;">
                                     <input type="number" name="id_classy" value="<%= classy.getToken() %>" style="display: none;">
-                                    <button class="actions" type="submit" name="acao" value="Excluir"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
+                                    <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
+                                    <button class="actions" type="submit" name="acao" value="Apagar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
                             </form>
+                            <%               
+                                }
+                            %>
                             </div>
                         </div>
                     </li>

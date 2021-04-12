@@ -19,7 +19,7 @@
                             <p>Bem vindo ao</p>
                             <h2>Classy.</h2>
                         </div>
-                        <a href='/Classy/' class="register">Voltar</a>
+                        <a href='/Classy/' class="register back">Voltar</a>
                     </div>
                 </header>
                 <div class="content">
@@ -63,5 +63,10 @@
         <script src="src/js/jquery.password-validation.js?v=1"></script>
         <script src="src/js/formValidate.js?v=2"></script>
         <script src="src/js/validatePassword.js?v=2"></script>
+        <script>
+            $(".back").click(function() {
+                history.back();
+              });
+        </script>
     </body>
 </html>

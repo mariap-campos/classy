@@ -1,4 +1,5 @@
 
+<%@page import="modelo.Aluno"%>
 <%@page import="util.SeparateSubject"%>
 <%@page import="modelo.Prova"%>
 <%@page import="java.util.ArrayList"%>
@@ -27,6 +28,7 @@
             Classy classy = (Classy) request.getAttribute("classy");
             SeparateSubject separator = new SeparateSubject();
             String[] materias = separator.splitSubjects(classy.getMaterias());
+            Aluno aluno = (Aluno) request.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">
@@ -38,8 +40,9 @@
                         </div>
                     </div>
                     <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                        <form name="alunoAtividade" action="ControleTabsUser" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
+                            <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
                             <input type="submit" name="acao" value="Provas" class="tabs current">
@@ -88,14 +91,6 @@
                             <p class="materia"><%= a.getMateria() %></p>
                         </div>
                         <p><span><%= a.getData() %></span></p>
-                        <div class="icons-box">
-                            <form name="optionsForm" action="ControleProva" method="POST" class="options">
-                                <input type="number" name="id" value="<%= a.getId() %>" style="display: none;">
-                                <input type="number" name="id_classy" value="<%= classy.getToken() %>" style="display: none;">
-                                <button class="actions" type="submit" name="acao" value="Apagar"><img class="icon" width="20" src="src/icons/trash-yellow.svg" alt="coração"></button>
-                                <button class="actions" type="submit" name="acao" value="abrirForm"><img class="icon" width="20" src="src/icons/edit-yellow.svg" alt="coração"></button>
-                            </form>
-                        </div>
                     </li>
                      <%
                         }

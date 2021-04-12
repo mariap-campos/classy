@@ -33,11 +33,14 @@
                             <h3><%= classy.getNome() %></h3>
                             <p><%= classy.getNome_instituicao() %></p>
                         </div>
-                        <a href='/Classy/' id="goBack" class="register">Sair</a>
+                        <form name="voltar" action="ControleAdmin" method="POST" class="list-classy">
+                            <input type="number" name="id" value="<%= admin.getId() %>" style="display: none;">
+                            <input class="register" id="goBack" type="submit" name="acao" value="Voltar ao menu" class="tabs">
+                        </form> 
                           
                     </div>
                     <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                        <form name="adminAtividade" action="ControleTabs" method="POST" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
@@ -61,7 +64,7 @@
                                 <input class="options" type="submit" name="acao" value="Nova Atividade">
                                 <input class="options" type="submit" name="acao" value="Nova Prova">
                                 <input class="options" type="submit" name="acao" value="Novo Aluno">
-                                <input class="options" type="submit" name="acao" value="Publicar no Fórum"> 
+                                <input class="options" type="submit" name="acao" value="Publicar no Forum"> 
                             </form>
                     </div>
                 </div>

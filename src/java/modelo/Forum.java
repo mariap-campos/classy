@@ -12,9 +12,29 @@ import java.sql.Date;
  * @author Maria Paula
  */
 public class Forum {
-    private  String postagem, assunto, nome;
+    private  String postagem, assunto, nome, user_nome;
     private Date data_postagem;
-    private int user_id, admin_id, id, classy_token;
+    private int user_id, id, classy_token;
+    private boolean isAdmin;
+
+    public String getUser_nome() {
+        return user_nome;
+    }
+
+    public void setUser_nome(String user_nome) {
+        this.user_nome = user_nome;
+    }
+    
+    
+
+    public boolean isIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+     
 
     public String getNome() {
         return nome;
@@ -66,14 +86,6 @@ public class Forum {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
-    }
-
-    public int getAdmin_id() {
-        return admin_id;
-    }
-
-    public void setAdmin_id(int admin_id) {
-        this.admin_id = admin_id;
     }
 
     public int getId() {

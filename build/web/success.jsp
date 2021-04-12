@@ -35,6 +35,11 @@
                 <input type="number" name="id" value="<%= classy %>">
                 <input id="listarForum" type="submit" name="acao" value="Forum">
             </form>
+                <form name="FEntrada" action="ControleTabsUser" method="POST" style="display: none;">
+                    <input type="number" name="id_aluno" value="<%= request.getAttribute("aluno") %>" style="display: none;">
+                    <input type="number" name="id" value="<%= classy%>">
+                    <input id="listarForumUser" type="submit" name="acao" value="Forum">
+                </form>
             <form name="FEntrada" action="ControleTabs" method="POST" style="display: none;">
                 <input type="number" name="id" value="<%= classy %>">
                 <input id="listarAluno" type="submit" name="acao" value="Alunos">
@@ -49,31 +54,35 @@
     <script type="text/javascript">
     <% if (request.getAttribute("tipo") == "Cadastrar") { %>
         window.onload = function() {
-        setTimeout(function(){ window.location.pathname = "/Classy/adminLogin.html"; }, 3000)
+        setTimeout(function(){ window.location.pathname = "/Classy/adminLogin.html"; }, 4000)
     }
     <% } else if (request.getAttribute("tipo") == "Listar") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#voltar').click(); }, 3000)
+        setTimeout(function(){ $('#voltar').click(); }, 4000)
     }
     <% } else if (request.getAttribute("tipo") == "Atividade") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#listar').click(); }, 3000)
+        setTimeout(function(){ $('#listar').click(); }, 4000)
     }
     <% } else if (request.getAttribute("tipo") == "Forum") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#listarForum').click(); }, 3000)
+        setTimeout(function(){ $('#listarForum').click(); }, 4000)
+    }
+        <% } else if (request.getAttribute("tipo") == "ForumUser") {%>
+        window.onload = function() {
+        setTimeout(function(){ $('#listarForumUser').click(); }, 4000)
     }
     <% } else if (request.getAttribute("tipo") == "Prova") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#listarProva').click(); }, 3000)
+        setTimeout(function(){ $('#listarProva').click(); }, 4000)
     }
      <% } else if (request.getAttribute("tipo") == "Aluno") {%>
         window.onload = function() {
-        setTimeout(function(){ $('#listarAluno').click(); }, 3000)
+        setTimeout(function(){ $('#listarAluno').click(); }, 4000)
     }
     <% } else if (request.getAttribute("tipo") == "Voltar") {%>
         window.onload = function() {
-        setTimeout(function(){ history.back(); }, 3000)
+        setTimeout(function(){ history.back(); }, 4000)
     }
     <% }%>
     </script>

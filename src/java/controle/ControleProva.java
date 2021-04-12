@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +21,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Prova;
 import modelo.Classy;
 import modelo.Prova;
 import util.ConverteDate;
@@ -49,6 +50,12 @@ public class ControleProva extends HttpServlet {
             if ("Cadastrar".equals(acao)) {
                 int classy_token = Integer.parseInt(request.getParameter("id"));
                 
+                Classy classy = new Classy();
+                classy.setToken(classy_token);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classyBuscar = cdao.consultarPorId(classy);
+
                 Prova prova = new Prova();
                 prova.setNome(request.getParameter("txtNomeProva"));
                 prova.setMateria(request.getParameter("txtMateria"));
@@ -58,16 +65,32 @@ public class ControleProva extends HttpServlet {
                 Date data1 = conversor.getDate(request.getParameter("txtDataProva"));
                
                 prova.setData(data1);
-               
-                
                 ProvaDAO adao = new ProvaDAO();
-                adao.cadastrar(prova);
-                System.out.println("Prova cadastrada com Sucesso!");
                 
-                request.setAttribute("title", "Prova marcada com sucesso!");
-                request.setAttribute("mensagem", "Clique na aba 'Provas' para ver todas as provas marcadas.");
-                request.setAttribute("tipo", "Listar");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                if (data1.after(classyBuscar.getData_final())) {
+                    request.setAttribute("title", "Data da prova inválida!");
+                    request.setAttribute("mensagem", "Certifique-se que a data da prova não ultrapassa o semestre escolar.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                } else {
+                    
+                    try {
+                    adao.cadastrar(prova);              
+                    request.setAttribute("title", "Prova marcada com sucesso!");
+                    request.setAttribute("mensagem", "Clique na aba 'Provas' para ver todas as provas marcadas.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("success.jsp").forward(request, response);
+                    
+                    } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                }
+                
             } else if ("Apagar".equals(acao)) {
                 Prova prova = new Prova();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -75,13 +98,21 @@ public class ControleProva extends HttpServlet {
                 
                 prova.setId(id);
                 ProvaDAO adao = new ProvaDAO();
-                adao.apagar(prova);     
                 
+                try {
+                adao.apagar(prova);     
                 request.setAttribute("title", "Prova apagada com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de suas provas.");
                 request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Prova");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para excluir o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             } else if ("abrirForm".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
           
@@ -117,15 +148,23 @@ public class ControleProva extends HttpServlet {
                 Date data1 = conversor.getDate(request.getParameter("txtDataProva"));
                
                 prova.setData(data1);
-                
                 ProvaDAO cdao = new ProvaDAO();
-                cdao.atualizar(prova);
                 
+                try {
+                cdao.atualizar(prova);
                 request.setAttribute("title", "Informações da prova atualizadas!");
                 request.setAttribute("mensagem", "Voltando a página de listagem.");
                 request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Prova");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             }  else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     

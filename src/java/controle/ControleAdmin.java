@@ -6,6 +6,7 @@
 package controle;
 
 import dao.AdminDAO;
+import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -26,15 +27,6 @@ import util.ConverteDate;
 @WebServlet(name = "ControleAdmin", urlPatterns = {"/ControleAdmin"})
 public class ControleAdmin extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -110,7 +102,7 @@ public class ControleAdmin extends HttpServlet {
                     Classy classy = new Classy();
                     classy.setId_admin(adminId.getId());
                 
-                    dao.ClassyDAO cdao = new dao.ClassyDAO();
+                    ClassyDAO cdao = new ClassyDAO();
                     ArrayList<Classy> todosClassys = new ArrayList<Classy>();
                     todosClassys = cdao.consultarTodos(classy);
                     
@@ -123,6 +115,25 @@ public class ControleAdmin extends HttpServlet {
                     request.setAttribute("tipo", "Login");
                     request.getRequestDispatcher("error.jsp").forward(request, response);;
                 }
+            } else if ("Voltar ao menu".equals(acao)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                
+                Admin admin = new Admin();
+                admin.setId(id);     
+   
+                AdminDAO adao = new AdminDAO();
+                Admin adminLogado = adao.consultarPorId(admin);
+
+                Classy classy = new Classy();
+                classy.setId_admin(id);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                ArrayList<Classy> todosClassys = new ArrayList<Classy>();
+                todosClassys = cdao.consultarTodos(classy);
+                    
+                request.setAttribute("classys", todosClassys);
+                request.setAttribute("admin", adminLogado);
+                request.getRequestDispatcher("listarClassy.jsp").forward(request, response);
             }
         } catch (Exception e) {
             System.out.println(e);

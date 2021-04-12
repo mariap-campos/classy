@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,16 +61,37 @@ public class ControleAtividade extends HttpServlet {
                 Date data1 = conversor.getDate(request.getParameter("txtData"));
                
                 ativ.setData_entrega(data1);
-               
+                
+                Classy classy = new Classy();
+                classy.setToken(classy_token);
+                
+                ClassyDAO cdao = new ClassyDAO();
+                Classy classyBuscar = cdao.consultarPorId(classy);
                 
                 dao.AtividadeDAO adao = new dao.AtividadeDAO();
-                adao.cadastrar(ativ);
-                System.out.println("Atividade cadastrada com Sucesso!");
                 
-                request.setAttribute("title", "Atividade criada com sucesso!");
-                request.setAttribute("mensagem", "Clique na aba 'Atividades' para ver todas as atividades.");
-                request.setAttribute("tipo", "Listar");
-                request.getRequestDispatcher("success.jsp").forward(request, response);
+                if (data1.after(classyBuscar.getData_final())) {
+                    request.setAttribute("title", "Data de entrega inválida!");
+                    request.setAttribute("mensagem", "Certifique-se que a entrega da atividade não ultrapassa o semestre escolar.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                } else {
+                    
+                    try {
+                    adao.cadastrar(ativ);               
+                    request.setAttribute("title", "Atividade criada com sucesso!");
+                    request.setAttribute("mensagem", "Clique na aba 'Atividades' para ver todas as atividades.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("success.jsp").forward(request, response);
+                    } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para realizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+                }
+                
             } else if ("Todos".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     Classy classy = new Classy();
@@ -186,13 +209,22 @@ public class ControleAtividade extends HttpServlet {
                 ativ.setData_entrega(data1);
                 
                 AtividadeDAO cdao = new AtividadeDAO();
-                cdao.atualizar(ativ);
                 
+                try {
+                cdao.atualizar(ativ);     
                 request.setAttribute("title", "Informações da Atividade atualizadas!");
                 request.setAttribute("mensagem", "Voltando a página de listagem.");
                 request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Atividade");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                }
             } else if ("Apagar".equals(acao)) {
                 Atividade atividade = new Atividade();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -200,13 +232,21 @@ public class ControleAtividade extends HttpServlet {
                 
                 atividade.setId(id);
                 AtividadeDAO adao = new AtividadeDAO();
-                adao.apagar(atividade);     
                 
+                try {
+                adao.apagar(atividade);     
                 request.setAttribute("title", "Atividade apagada com sucesso!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de suas atividades.");
                 request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Atividade");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para excluir o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
             }
         } catch (Exception e) {
             System.out.println(e);
