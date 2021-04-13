@@ -6,6 +6,7 @@
 package controle;
 
 import dao.AlunoDAO;
+import dao.AtividadeDAO;
 import dao.ClassyDAO;
 import dao.ForumDAO;
 import dao.ProvaDAO;
@@ -54,6 +55,17 @@ public class ControleTabsUser extends HttpServlet {
                 Classy classy = new Classy();
                 classy = cdao.consultarPorId(classyId); 
                 
+                Atividade atividade = new Atividade();
+                atividade.setClassy_token(id);
+                AtividadeDAO atdao = new AtividadeDAO();
+                ArrayList<Atividade> ativBuscar = atdao.consultarHome(atividade);
+                
+                Prova prova = new Prova();
+                prova.setToken_classy(id);
+                ProvaDAO pdao = new ProvaDAO();
+                ArrayList<Prova> provaBuscar = pdao.consultarHome(prova);
+                
+                
                 AlunoDAO adao = new AlunoDAO();
                 Aluno alunoId = new Aluno();
                 alunoId.setId(id_aluno);
@@ -62,6 +74,8 @@ public class ControleTabsUser extends HttpServlet {
                 
                 request.setAttribute("classy", classy);
                 request.setAttribute("aluno", aluno);
+                request.setAttribute("atividades", ativBuscar);
+                request.setAttribute("provas", provaBuscar);
                 request.getRequestDispatcher("userHome.jsp").forward(request, response);
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));

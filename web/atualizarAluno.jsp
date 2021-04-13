@@ -14,7 +14,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Atualizar Atividade</title>
+        <title>Classy. | Editar Aluno</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css?v=2">
@@ -37,7 +37,7 @@
                     </div>
                 </header>
                 <div class="content">
-                    <h2>Editar Atividade</h2>
+                    <h2>Editar Aluno</h2>
                     <p>Atualize as informações abaixo sobre o aluno</p>
                         <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAluno" method="POST" class="form">
                             <input type="number" name="id" value="<%= aluno.getId() %>" style="display: none;">

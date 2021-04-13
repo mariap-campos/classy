@@ -4,6 +4,9 @@
     Author     : Maria Paula
 --%>
 
+<%@page import="modelo.Prova"%>
+<%@page import="modelo.Atividade"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Aluno"%>
 <%@page import="modelo.Classy"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,6 +29,8 @@
         <% 
             Classy classy = (Classy) request.getAttribute("classy");
             Aluno aluno = (Aluno) request.getAttribute("aluno");
+            ArrayList<Atividade> ativ = (ArrayList<Atividade>) request.getAttribute("atividades");
+            ArrayList<Prova> prova = (ArrayList<Prova>) request.getAttribute("provas");
         %>
         <div class="container">
                 <header class="header">
@@ -74,37 +79,59 @@
                         <div class="classy-options">
                             <ul class="atividades">
                                 <h3>Próximas Atividades</h3>
+                            <%
+                                if (ativ.isEmpty()) {
+                            %>
+                            <li class="atividade-item empty">
+                                <div class="ativ-top">
+                                    <p class="materia">Não há atividades ainda.</p>
+                                </div>
+                            </li>
+                            <%
+                                }
+                            %>
+                            <%
+                                for (Atividade a : ativ){
+                            %>
                                 <li class="atividade-item">
                                     <div class="infos">
-                                        <h3 class="title">Atividade 2 </h3>
-                                        <p class="subject">Banco de Dados</p>
+                                        <h3 class="title"><%= a.getNome() %></h3>
+                                        <p class="subject"><%= a.getMateria() %></p>
                                     </div>
-                                    <div class="data">02/03/2021</div>
+                                    <div class="data"> <%= a.getData_entrega() %></div>
                                 </li>
-                                <li class="atividade-item">
-                                    <div class="infos">
-                                        <h3 class="title">Atividade 2 </h3>
-                                        <p class="subject">Banco de Dados</p>
-                                    </div>
-                                    <div class="data">02/03/2021</div>
-                                </li>
+                            <%
+                                }
+                            %>
+                            <p style="text-align:end;font-size: 12px;" >Veja todas na aba 'Atividades'</p>
                             </ul>
                             <ul class="provas">
                                 <h3>Próximas Provas</h3>
+                            <%
+                                if (prova.isEmpty()) {
+                            %>
+                            <li class="atividade-item empty">
+                                <div class="ativ-top">
+                                    <p class="materia">Não há provas marcadas.</p>
+                                </div>
+                            </li>
+                            <%
+                                }
+                            %>
+                            <%
+                                for (Prova p : prova){
+                            %>
                                 <li class="atividade-item prova">
                                     <div class="infos">
-                                        <h3 class="title">P1 </h3>
-                                        <p class="subject">Banco de Dados</p>
+                                        <h3 class="title"><%= p.getNome() %> </h3>
+                                        <p class="subject"><%= p.getMateria() %></p>
                                     </div>
-                                    <div class="data">02/03/2021</div>
+                                    <div class="data"><%= p.getData() %></div>
                                 </li>
-                                <li class="atividade-item prova">
-                                    <div class="infos">
-                                        <h3 class="title">Simulado </h3>
-                                        <p class="subject">Banco de Dados</p>
-                                    </div>
-                                    <div class="data">02/03/2021</div>
-                                </li>
+                                <%
+                                }
+                            %>
+                            <p style="text-align:end;font-size: 12px;">Veja todas na aba 'Provas'</p>
                             </ul>
                     </div>
                 </div>

@@ -6,16 +6,21 @@
 package controle;
 
 import dao.AlunoDAO;
+import dao.AtividadeDAO;
 import dao.ClassyDAO;
+import dao.ProvaDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Aluno;
+import modelo.Atividade;
 import modelo.Classy;
+import modelo.Prova;
 
 /**
  *
@@ -151,10 +156,22 @@ public class ControleAluno extends HttpServlet {
                     Classy classy = new Classy();
                     classy.setToken(alunoLogado.getClassy_token());
                     Classy classyBuscar = cdao.consultarPorId(classy);
+                    
+                    Atividade atividade = new Atividade();
+                    atividade.setClassy_token(alunoLogado.getClassy_token());
+                    AtividadeDAO atdao = new AtividadeDAO();
+                    ArrayList<Atividade> ativBuscar = atdao.consultarHome(atividade);
+                    
+                    Prova prova = new Prova();
+                    prova.setToken_classy(alunoLogado.getClassy_token());
+                    ProvaDAO pdao = new ProvaDAO();
+                    ArrayList<Prova> provaBuscar = pdao.consultarHome(prova);
                    
                    
                     request.setAttribute("aluno", alunoLogado);
                     request.setAttribute("classy", classyBuscar);
+                    request.setAttribute("atividades", ativBuscar);
+                    request.setAttribute("provas", provaBuscar);
                     request.getRequestDispatcher("userHome.jsp").forward(request, response);
                 } else {
                     request.setAttribute("title", "Usuário não existe ou está incorreto!");

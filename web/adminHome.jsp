@@ -12,13 +12,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Classy.</title>
+        <title>Classy. | Home</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
         <link rel="stylesheet" href="src/styles/classys.css?v=3">
         <link rel="stylesheet" href="src/styles/perfil.css?v=1">
+    <a href="adminLogin.html"></a>
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>

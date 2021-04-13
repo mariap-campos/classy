@@ -21,6 +21,7 @@ import util.ConectaBanco;
 public class AtividadeDAO {
     public static final String INSERT = "INSERT INTO atividade (nome, descricao, professor, data_entrega, materia, token_classy) values (?,?,?,?,?,?)";
     public static final String SELECT = "SELECT * from atividade where token_classy=? order by data_entrega asc";
+    public static final String SELECT_LIMIT = "SELECT * from atividade where token_classy=? order by data_entrega asc limit 2";
     public static final String SELECT_ID = "SELECT * from atividade where id=?";
     public static final String SELECT_10 = "SELECT * from atividade where data_entrega between (CURRENT_DATE) and (CURRENT_DATE + 10) and token_classy=? order by data_entrega asc";
     public static final String SELECT_At = "SELECT * from atividade where data_entrega < current_Date and token_classy=? order by data_entrega desc";
@@ -58,6 +59,42 @@ public class AtividadeDAO {
         try {
             conexao = ConectaBanco.getConexao();
             PreparedStatement comando = conexao.prepareStatement(SELECT);
+            comando.setInt(1, ativ.getClassy_token());
+            ResultSet resultado = comando.executeQuery();
+            
+            ArrayList<Atividade> todosAtiv = new ArrayList<Atividade>();
+            while (resultado.next()){
+                Atividade p = new Atividade();
+                p.setId(resultado.getInt("id"));
+                p.setNome(resultado.getString("nome"));
+                p.setDescricao(resultado.getString("descricao"));
+                p.setProfessor(resultado.getString("professor"));
+                p.setMateria(resultado.getString("materia"));
+                p.setData_entrega(resultado.getDate("data_entrega"));
+                p.setClassy_token(resultado.getInt("token_classy"));
+                todosAtiv.add(p);     
+            }
+            
+            return todosAtiv;
+          
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+      
+    }
+    
+    public ArrayList<Atividade> consultarHome(Atividade ativ) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement comando = conexao.prepareStatement(SELECT_LIMIT);
             comando.setInt(1, ativ.getClassy_token());
             ResultSet resultado = comando.executeQuery();
             
