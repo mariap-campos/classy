@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.Admin;
 import modelo.Classy;
 import util.ConverteDate;
+import java.util.UUID;
+import util.randomToken;
 
 /**
  *
@@ -38,6 +40,7 @@ public class ControleAdmin extends HttpServlet {
                 admin.setNome(request.getParameter("campoNome"));
                 admin.setSenha(request.getParameter("campoSenha"));
                 admin.setEmail(request.getParameter("campoEmail"));
+                admin.setImagem(request.getParameter("campoImagem"));
                 
                 AdminDAO adao = new AdminDAO();
                 try {
@@ -134,7 +137,75 @@ public class ControleAdmin extends HttpServlet {
                 request.setAttribute("classys", todosClassys);
                 request.setAttribute("admin", adminLogado);
                 request.getRequestDispatcher("listarClassy.jsp").forward(request, response);
-            }
+            }  else if ("Enviar email".equals(acao)) {
+                Admin admin = new Admin();
+                admin.setUsuario(request.getParameter("campoUsuario"));
+                randomToken random = new randomToken(); 
+                
+                String novaSenha = random.randomString();
+                admin.setSenha(novaSenha);
+                
+                AdminDAO adao = new AdminDAO();
+                adao.updatePassword(admin);
+                Admin adminId = adao.getId(admin);
+                Admin adminBuscar = adao.consultarPorId(adminId);
+                    
+                request.setAttribute("senha", novaSenha);
+                request.setAttribute("email", adminBuscar.getEmail());
+                request.setAttribute("title", "Enviamos sua nova senha no seu email!");
+                request.setAttribute("mensagem", "Por favor, verifique sua caixa de entrada.");
+                request.setAttribute("tipo", "Email");
+                request.getRequestDispatcher("success.jsp").forward(request, response);
+            }  else if ("Editar Dados".equals(acao)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+          
+                Admin admin = new Admin();
+                admin.setId(id);
+                
+                AdminDAO cdao = new AdminDAO();
+                Admin adminBuscar = new Admin();
+                adminBuscar = cdao.consultarPorId(admin);
+                   
+                request.setAttribute("admin", adminBuscar);
+                request.getRequestDispatcher("atualizarAdmin.jsp").forward(request, response);
+            } else if ("Atualizar".equals(acao)) {
+                Admin admin = new Admin();
+                AdminDAO cdao = new AdminDAO();
+                int id = Integer.parseInt(request.getParameter("id"));  
+                
+                admin.setId(id);
+                admin.setNome(request.getParameter("campoNome"));
+                admin.setUsuario(request.getParameter("campoUsuario"));
+                admin.setImagem(request.getParameter("campoImagem"));
+                admin.setEmail(request.getParameter("campoEmail"));
+               
+               Admin adminUser = cdao.consultarPorId(admin);
+                
+                try {
+                    
+                    if (cdao.getUsuario(admin) && !adminUser.getUsuario().equals(admin.getUsuario()) ) {
+      
+                        request.setAttribute("title", "O usuário <span>" + admin.getUsuario() + "</span> já existe!");
+                        request.setAttribute("mensagem", "Por favor, escolha outro usuário");
+                        request.setAttribute("tipo", "Listar");
+                        request.getRequestDispatcher("error.jsp").forward(request, response);
+                    
+                    } else {
+                        cdao.atualizar(admin);
+                        request.setAttribute("title", "Dados atualizados!");
+                        request.setAttribute("mensagem", "Voltando a home");
+                        request.setAttribute("tipo", "Listar");
+                        request.getRequestDispatcher("success.jsp").forward(request, response);
+                    }
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+            } 
         } catch (Exception e) {
             System.out.println(e);
             request.setAttribute("ERROOOOOOOOOO", e);

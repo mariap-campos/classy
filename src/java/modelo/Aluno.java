@@ -11,7 +11,15 @@ package modelo;
  */
 public class Aluno {
     private int id, classy_token;
-    private String nome, rgm, situacao;
+    private String nome, rgm, situacao, imagem;
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
 
     public String getSituacao() {
         return situacao;

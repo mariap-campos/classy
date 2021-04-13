@@ -11,7 +11,17 @@ package modelo;
  */
 public class Admin {
     private int id;
-    private String nome, usuario, senha, email;
+    private String nome, usuario, senha, email, imagem;
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+    
+    
 
     public int getId() {
         return id;

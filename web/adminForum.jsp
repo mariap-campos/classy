@@ -77,7 +77,11 @@
                     <li class="classy-forum">
                         <div class="user">
                             <p><%= f.getNome() %></p>
-                            <img class="icon" width="20" src="src/icons/user.svg" alt="coração">
+                            <% if(f.getImagem() == null) { %>
+                                    <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
+                            <% } else { %>
+                                    <img class="imagem-perfil" src="<%= f.getImagem() %>" alt="usuario">
+                            <% }%>
                         </div>
                         <div class="message">
                             <h5><%= f.getAssunto() %></h5>

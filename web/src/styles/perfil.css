@@ -1,0 +1,60 @@
+.perfil {
+    display: flex;
+    margin-bottom:20px;
+}
+
+.info p {
+    margin: 0;
+}
+
+.imagem-perfil {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.info p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.info input {
+    background: transparent;
+    border: none;
+    text-align: left;
+    color: var(--darkblue);
+    font-weight: 600;
+    text-decoration: underline;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.icon-perfil {
+    background-color: var(--blue);
+    padding: 10px 8px 10px 12px;
+    width: 38px;
+    border-radius: 80%;
+}
+
+.atualizar {
+    justify-content: center;
+}
+.input-imagem {
+    width: 60%;
+    margin-left: 14px;
+}
+
+.input-imagem input {
+    width: 80%;
+}
+
+
+

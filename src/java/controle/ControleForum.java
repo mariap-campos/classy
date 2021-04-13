@@ -60,6 +60,7 @@ public class ControleForum extends HttpServlet {
                 forum.setAssunto(request.getParameter("txtAssunto"));
                 forum.setUser_id(id_user);
                 forum.setUser_nome(adminBuscar.getNome());
+                forum.setImagem(adminBuscar.getImagem());
                 forum.setClassy_token(classy_token);
                 
                 ForumDAO fdao = new ForumDAO();
@@ -104,6 +105,7 @@ public class ControleForum extends HttpServlet {
                 forum.setAssunto(request.getParameter("txtAssunto"));
                 forum.setUser_id(id_user);
                 forum.setUser_nome(alunoBuscar.getNome());
+                forum.setImagem(alunoBuscar.getImagem());
                 forum.setClassy_token(classy_token);
                 
                 ForumDAO fdao = new ForumDAO();

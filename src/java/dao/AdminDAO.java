@@ -5,10 +5,12 @@
  */
 package dao;
 
+import static dao.AdminDAO.UPDATE;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import modelo.Admin;
 import modelo.Admin;
 import util.ConectaBanco;
 
@@ -18,9 +20,11 @@ import util.ConectaBanco;
  */
 public class AdminDAO {
     
-    public static final String INSERT = "INSERT INTO admin (nome, usuario, senha, email) values (?,?,?,?)";
+    public static final String INSERT = "INSERT INTO admin (nome, usuario, senha, email,imagem) values (?,?,?,?,?)";
     public static final String SELECT_ID = "SELECT * from admin where id=?";
     public static final String SELECT_USER = "SELECT * from admin where usuario=?";
+    public static final String UPDATE_PASSWORD = "UPDATE admin set senha=? where usuario=?";
+    public static final String UPDATE = "UPDATE admin SET nome = ?, usuario = ?, imagem = ?, email = ? WHERE id=?";
     
     public void cadastrar(Admin admin) {
         Connection conexao = null;
@@ -31,6 +35,7 @@ public class AdminDAO {
             pstmt.setString(2, admin.getUsuario());
             pstmt.setString(3, admin.getSenha());
             pstmt.setString(4, admin.getEmail());
+            pstmt.setString(5, admin.getImagem());
             pstmt.execute();   
         } catch (Exception e){
             throw new RuntimeException(e);
@@ -99,7 +104,7 @@ public class AdminDAO {
         Connection conexao = null;
         try {
             conexao = ConectaBanco.getConexao();
-            PreparedStatement pstmt = conexao.prepareStatement("SELECT id, usuario, senha, nome, email FROM admin where usuario='" + admin.getUsuario() + "' and senha='" + admin.getSenha() + "'");
+            PreparedStatement pstmt = conexao.prepareStatement("SELECT id, usuario, senha, nome, email, imagem FROM admin where usuario='" + admin.getUsuario() + "' and senha='" + admin.getSenha() + "'");
             ResultSet resultado = pstmt.executeQuery();
             Admin adminLogado = new Admin();
             while (resultado.next()){
@@ -108,6 +113,7 @@ public class AdminDAO {
                 adminLogado.setSenha(resultado.getString("senha")); 
                 adminLogado.setNome(resultado.getString("nome")); 
                 adminLogado.setEmail(resultado.getString("email")); 
+                adminLogado.setImagem(resultado.getString("imagem")); 
             }  
             
             return adminLogado;
@@ -136,7 +142,9 @@ public class AdminDAO {
             while (resultado.next()){
                 adminResult.setId(resultado.getInt("id"));
                 adminResult.setNome(resultado.getString("nome"));
+                adminResult.setUsuario(resultado.getString("usuario"));
                 adminResult.setEmail(resultado.getString("email"));
+                adminResult.setImagem(resultado.getString("imagem"));
 
             }  
             
@@ -153,6 +161,51 @@ public class AdminDAO {
             }
         }
       
+    }
+    
+    public void updatePassword(Admin admin) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(UPDATE_PASSWORD);
+            pstmt.setString(1, admin.getSenha());
+            pstmt.setString(2, admin.getUsuario());
+
+            pstmt.execute();   
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    }
+    
+    public void atualizar(Admin admin) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(UPDATE);
+            pstmt.setString(1, admin.getNome());
+            pstmt.setString(2, admin.getUsuario());
+            pstmt.setString(3, admin.getImagem());
+            pstmt.setString(4, admin.getEmail());
+            pstmt.setInt(5, admin.getId());
+
+            pstmt.execute();   
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
     }
     
     

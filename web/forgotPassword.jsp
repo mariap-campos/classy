@@ -28,12 +28,11 @@
                     <a href='/Classy/' class="register">Voltar</a>
                 </header>
                 <div class="content">
-                    <h2>Informe a senha enviada ao seu email</h2>
+                    <h2>Informe seu usuário para receber um email de recuperação de senha</h2>
                     <form accept-charset="ISO-8859-1" name="FEntrada" action="ControleAdmin" method="POST" class="form">
-                        <input type="text" name="campoEmailSenha" id="campoUsuario" placeholder="Senha">
-                        <input name="acao" type="submit" value="Enviar" class="submit">
+                        <input type="text" name="campoUsuario" id="campoUsuario" placeholder="Usuário">
+                        <input name="acao" type="submit" value="Enviar email" class="submit">
                     </form>
-                    <p><a href="forgotPassword.jsp" >Esqueci minha senha</a></p>
                     <p>Não possui uma conta? <a href="signUp.html" >Cadastre-se!</a></p>
                 </div>
                 <footer>

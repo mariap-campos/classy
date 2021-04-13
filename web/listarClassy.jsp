@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="src/styles/global.css?v=1">
         <link rel="stylesheet" href="src/styles/signup.css?v=2">
         <link rel="stylesheet" href="src/styles/adminClassys.css?v=1">
+        <link rel="stylesheet" href="src/styles/perfil.css?v=1">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -38,6 +39,20 @@
                     </div>
                 </header>
                 <div class="content">
+                    <div class="perfil">
+                            <div class="user">
+                                <% if(admin.getImagem() == null) { %>
+                                    <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
+                                <% } else { %>
+                                    <img class="imagem-perfil" src="<%= admin.getImagem() %>" alt="usuario">
+                                <% }%>
+                            </div>
+                        <form class="info"  name="edit" accept-charset="ISO-8859-1" name="FEntrada" action="ControleAdmin" method="POST" >
+                            <input type="number" name="id" value="<%= admin.getId() %>" style="display: none;">
+                            <p><%= admin.getNome() %> (Administrador)</p>
+                            <input class="entrar" type="submit" name="acao" value="Editar Dados">
+                        </form>
+                    </div>
                     <h2>Aqui estão todos os <span>Classys</span> que você administra</h2>
                     <p>Entre em um para começar.</p>
                     <ul class="classy-items">

@@ -18,8 +18,8 @@ import util.ConectaBanco;
  * @author Maria Paula
  */
 public class ForumDAO {
-    public static final String INSERT = "insert into forum (postagem, assunto, user_id, nome, classy_token) values (?,?,?,?,?);";
-    public static final String SELECT = "select id, postagem,assunto, data_postagem, user_id,nome, classy_token from forum where classy_token = ? order by data_postagem desc";
+    public static final String INSERT = "insert into forum (postagem, assunto, user_id, nome, imagem, classy_token) values (?,?,?,?,?,?);";
+    public static final String SELECT = "select id, postagem,assunto, data_postagem, user_id, nome,imagem, classy_token from forum where classy_token = ? order by data_postagem desc";
     public static final String DELETE = "DELETE FROM forum WHERE id=?";
     
     public void postar(Forum forum) {
@@ -31,7 +31,8 @@ public class ForumDAO {
             pstmt.setString(2, forum.getAssunto());
             pstmt.setInt(3, forum.getUser_id());
             pstmt.setString(4, forum.getUser_nome());
-            pstmt.setInt(5, forum.getClassy_token());
+            pstmt.setString(5, forum.getImagem());
+            pstmt.setInt(6, forum.getClassy_token());
 
             pstmt.execute();   
         } catch (Exception e){
@@ -63,6 +64,7 @@ public class ForumDAO {
                 p.setData_postagem(resultado.getDate("data_postagem"));
                 p.setUser_id(resultado.getInt("user_id"));
                 p.setNome(resultado.getString("nome"));
+                p.setImagem(resultado.getString("imagem"));
                 p.setClassy_token(resultado.getInt("classy_token"));
                 todosForum.add(p);     
             }

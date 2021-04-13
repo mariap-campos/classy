@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="src/styles/signup.css">
         <link rel="stylesheet" href="src/styles/classys.css?v=3">
         <link rel="stylesheet" href="src/styles/userHome.css">
+        <link rel="stylesheet" href="src/styles/perfil.css">
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -50,7 +51,20 @@
                     </nav>
                 </header>
                 <div class="classy-box">
-                    <h3>Bem vindo, <%= aluno.getNome() %>!</h3>
+                    <div class="perfil">
+                            <div class="user">
+                                <% if(aluno.getImagem() == null) { %>
+                                    <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
+                                <% } else { %>
+                                    <img class="imagem-perfil" src="<%= aluno.getImagem() %>" alt="usuario">
+                                <% }%>
+                            </div>
+                        <form class="info"  name="edit" accept-charset="ISO-8859-1" name="FEntrada" action="ControleAluno" method="POST" >
+                            <input type="number" name="id" value="<%= aluno.getId() %>" style="display: none;">
+                            <p><%= aluno.getNome() %> (<%= aluno.getRgm() %>)</p>
+                            <input class="entrar" type="submit" name="acao" value="Editar Dados">
+                        </form>
+                    </div>
                     <div class="line"></div>
                     <div class="classy-flex">
                         <div class="classy-header">

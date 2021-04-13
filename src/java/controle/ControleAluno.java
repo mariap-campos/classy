@@ -5,18 +5,15 @@
  */
 package controle;
 
-import dao.AdminDAO;
 import dao.AlunoDAO;
 import dao.ClassyDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.Admin;
 import modelo.Aluno;
 import modelo.Classy;
 
@@ -165,7 +162,42 @@ public class ControleAluno extends HttpServlet {
                     request.setAttribute("tipo", "Listar");
                     request.getRequestDispatcher("error.jsp").forward(request, response);;
                 }
-            }
+            }  else if ("Editar Dados".equals(acao)) {
+                int id = Integer.parseInt(request.getParameter("id"));
+          
+                Aluno aluno = new Aluno();
+                aluno.setId(id);
+                
+                AlunoDAO cdao = new AlunoDAO();
+                Aluno alunoBuscar = new Aluno();
+                alunoBuscar = cdao.consultarPorId(aluno);
+                   
+                request.setAttribute("aluno", alunoBuscar);
+                request.getRequestDispatcher("editarDados.jsp").forward(request, response);
+            } else if ("Atualizar Dados".equals(acao)) {
+                Aluno aluno = new Aluno();
+                AlunoDAO cdao = new AlunoDAO();
+                int id = Integer.parseInt(request.getParameter("id"));  
+                
+                aluno.setId(id);
+                aluno.setNome(request.getParameter("campoNome"));
+                aluno.setImagem(request.getParameter("campoImagem"));
+
+                try {
+                        cdao.atualizarDados(aluno);
+                        request.setAttribute("mensagem", "Voltando a home");
+                        request.setAttribute("title", "Dados atualizados!");
+                        request.setAttribute("tipo", "Listar");
+                        request.getRequestDispatcher("success.jsp").forward(request, response);
+                
+                } catch (Exception e){
+                    System.out.println(e);
+                    request.setAttribute("title", "Problemas para atualizar o cadastro no banco de dados");
+                    request.setAttribute("mensagem", "Tente novamente mais tarde.");
+                    request.setAttribute("tipo", "Listar");
+                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    }
+            } 
         } catch (Exception e) {
             System.out.println(e);
             request.setAttribute("erro", e);

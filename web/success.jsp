@@ -40,6 +40,11 @@
                     <input type="number" name="id" value="<%= classy%>">
                     <input id="listarForumUser" type="submit" name="acao" value="Forum">
                 </form>
+            <form name="FEntrada" action="ControleTabsUser" method="POST" style="display: none;">
+                    <input type="number" name="id_aluno" value="<%= request.getAttribute("aluno") %>" style="display: none;">
+                    <input type="number" name="id" value="<%= classy%>">
+                    <input id="home" type="submit" name="acao" value="Home">
+            </form>
             <form name="FEntrada" action="ControleTabs" method="POST" style="display: none;">
                 <input type="number" name="id" value="<%= classy %>">
                 <input id="listarAluno" type="submit" name="acao" value="Alunos">
@@ -51,6 +56,7 @@
         </div>
     </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script type="text/javascript">
     <% if (request.getAttribute("tipo") == "Cadastrar") { %>
         window.onload = function() {
@@ -76,6 +82,10 @@
         window.onload = function() {
         setTimeout(function(){ $('#listarProva').click(); }, 4000)
     }
+    <% } else if (request.getAttribute("tipo") == "Home") {%>
+        window.onload = function() {
+        setTimeout(function(){ $('#home').click(); }, 4000)
+    }
      <% } else if (request.getAttribute("tipo") == "Aluno") {%>
         window.onload = function() {
         setTimeout(function(){ $('#listarAluno').click(); }, 4000)
@@ -83,6 +93,19 @@
     <% } else if (request.getAttribute("tipo") == "Voltar") {%>
         window.onload = function() {
         setTimeout(function(){ history.back(); }, 4000)
+    }     
+    <% } else if (request.getAttribute("tipo") == "Email") {%>
+        window.onload = function() {
+        Email.send({
+	Host: "smtp.gmail.com",
+	Username : "classy.suporte@gmail.com",
+	Password : "Classy1234-",
+	To : '<%= request.getAttribute("email") %>',
+	From : "classy.suporte@gmail.com",
+	Subject : "Classy - Recuperação de Senha",
+	Body : "<h2 style='color:#56cad8'>Olá! Ficamos sabendo que você esqueceu sua senha :( </h2><p style='color:#3B3941;font-weight:600;'>Não se preocupe! Use esta nova que te enviamos para acessar o portal!</p><h1 style='color:#56cad8'><%= request.getAttribute("senha") %></h1><p style='color:#3B3941;font-weight:600;'>Com amor, time Classy <3</p>",
+	})
+        setTimeout(function(){ window.location.pathname = '/Classy/adminLogin.html'; }, 4000)
     }
     <% }%>
     </script>

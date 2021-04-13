@@ -24,6 +24,7 @@ public class AlunoDAO {
     public static final String SELECT_ID = "SELECT * from aluno where id=?";
     public static final String DELETE = "DELETE FROM aluno WHERE id=?";
     public static final String UPDATE = "UPDATE aluno SET nome = ?, rgm = ?, situacao = ? WHERE id=?";
+    public static final String UPDATE_Data = "UPDATE aluno SET nome = ?, imagem = ? WHERE id=?";
     public static final String SELECT_USER = "SELECT * from aluno where rgm=?";
     
     public void cadastrar(Aluno aluno) {
@@ -78,13 +79,14 @@ public class AlunoDAO {
         Connection conexao = null;
         try {
             conexao = ConectaBanco.getConexao();
-            PreparedStatement pstmt = conexao.prepareStatement("SELECT id, rgm, nome, classy_token FROM aluno where rgm='" + aluno.getRgm() + "'");
+            PreparedStatement pstmt = conexao.prepareStatement("SELECT id, rgm, nome,imagem, classy_token FROM aluno where rgm='" + aluno.getRgm() + "'");
             ResultSet resultado = pstmt.executeQuery();
             Aluno AlunoLogado = new Aluno();
             while (resultado.next()){
                 AlunoLogado.setId(resultado.getInt("id"));  
                 AlunoLogado.setRgm(resultado.getString("rgm"));  
                 AlunoLogado.setNome(resultado.getString("nome")); 
+                AlunoLogado.setImagem(resultado.getString("imagem")); 
                 AlunoLogado.setClassy_token(resultado.getInt("classy_token")); 
             }  
             
@@ -143,6 +145,7 @@ public class AlunoDAO {
                 p.setNome(resultado.getString("nome"));
                 p.setRgm(resultado.getString("rgm"));
                 p.setSituacao(resultado.getString("situacao"));
+                p.setImagem(resultado.getString("imagem"));
                 p.setClassy_token(resultado.getInt("classy_token"));
                 todosAluno.add(p);     
             }
@@ -194,6 +197,7 @@ public class AlunoDAO {
                 alunoResult.setNome(resultado.getString("nome"));
                 alunoResult.setRgm(resultado.getString("rgm")); 
                 alunoResult.setSituacao(resultado.getString("situacao")); 
+                alunoResult.setImagem(resultado.getString("imagem")); 
                 alunoResult.setClassy_token(resultado.getInt("classy_token")); 
             }  
             
@@ -220,6 +224,28 @@ public class AlunoDAO {
             pstmt.setString(2, aluno.getRgm());
             pstmt.setString(3, aluno.getSituacao());
             pstmt.setInt(4, aluno.getId());
+
+            pstmt.execute();   
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        finally {
+            try {
+                conexao.close();
+            } catch (SQLException el) {
+                throw new RuntimeException(el);
+            }
+        }
+    }
+    
+    public void atualizarDados(Aluno aluno) {
+        Connection conexao = null;
+        try {
+            conexao = ConectaBanco.getConexao();
+            PreparedStatement pstmt = conexao.prepareStatement(UPDATE_Data);
+            pstmt.setString(1, aluno.getNome());
+            pstmt.setString(2, aluno.getImagem());
+            pstmt.setInt(3, aluno.getId());
 
             pstmt.execute();   
         } catch (Exception e){
