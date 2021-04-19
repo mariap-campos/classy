@@ -169,6 +169,31 @@ h4, h5 {
     padding: 0!important;
 }
 
+@media screen and (max-width: 1023px) {  
+    form.form {
+         width: 90%;
+        margin: 35px auto;
+    }
+    
+    .classy-forum {
+        width: 80%;
+        margin: 40px 18px;
+    }
+    
+    .icon-perfil {
+            width: 30px!important;
+    }
+    
+    .imagem-perfil {
+    width: 52px!important;
+}
+
+.message {
+        margin-left: 30px;
+}
+}
+
+
 
 
 

@@ -38,7 +38,9 @@
                         </div>
                     </div>
                     <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                        <img id="open-menu" class="icon menu-btn" width="20" src="src/icons/menu.svg" alt="coração">
+                        <img id="open-menu" class="icon cross-btn" width="20" src="src/icons/cancel.svg" alt="coração">
+                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" class="menu-panel" >
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
@@ -49,7 +51,8 @@
                     </nav>
                 </header>
                 <div class="filters">
-                    <form name="filtros" action="ControleProva" method="POST">
+                    <button class="filter-btn">Filtrar</button>
+                    <form name="FEntrada" action="ControleProva" method="POST" class="filter-panel">
                         <p>Filtrar por matéria:</p>
                         <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                         <select id="materias" name="txtMateria" placeholder="Matérias">
@@ -106,6 +109,14 @@
                     <p>O que é o <a href='/' class="classy">Classy.?</a></p>
                     <p><a href='/'>Termos de Uso</a></p>
                 </footer>
-        <script src="" async defer></script>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="src/js/menuMobile.js"></script>
+            <script>
+         $(".filter-btn").click(
+            function() {
+              $('.filter-panel').toggleClass('showPanel');
+            }
+          );
+    </script>
     </body>
 </html>

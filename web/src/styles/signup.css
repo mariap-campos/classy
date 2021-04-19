@@ -158,3 +158,27 @@ footer .classy {
     font-weight: bold;
     color: var(--blue);
 }
+
+@media screen and (max-width: 1023px) {
+    .content {
+        width: 90%;
+        padding: 30px 25px;
+    }
+    
+    .input-double label.error {
+    bottom: -44px;
+    }
+    
+    label[for=campoFinal] {
+    bottom: -81px!important;
+    }
+    
+    .signup h3::after {    
+    width: 25%;
+    }
+    
+    .header-itens {
+    width: 84%;
+    }
+}
+

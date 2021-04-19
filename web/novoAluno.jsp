@@ -30,7 +30,9 @@
                         </div>
                     </div>
                     <nav>
-                        <form name="adminAtividade" name="FEntrada" action="ControleTabs" method="POST" >
+                                                <img id="open-menu" class="icon menu-btn" width="20" src="src/icons/menu.svg" alt="coração">
+                        <img id="open-menu" class="icon cross-btn" width="20" src="src/icons/cancel.svg" alt="coração">
+                        <form name="adminAtividade" action="ControleTabs" method="POST" class="menu-panel">
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
@@ -74,6 +76,7 @@
                 history.back();
               });
         </script>
+                <script src="src/js/menuMobile.js"></script>
     </body>
 </html>
 

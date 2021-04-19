@@ -17,7 +17,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="src/styles/global.css">
         <link rel="stylesheet" href="src/styles/signup.css">
-        <link rel="stylesheet" href="src/styles/classys.css?v=3">
+        <link rel="stylesheet" href="src/styles/classys.css?v=7">
         <link rel="stylesheet" href="src/styles/perfil.css?v=1">
     <a href="adminLogin.html"></a>
         <link href="https://fonts.googleapis.com/css2?family=Long+Cang&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -42,7 +42,9 @@
                           
                     </div>
                     <nav>
-                        <form name="adminAtividade" action="ControleTabs" method="POST" >
+                        <img id="open-menu" class="icon menu-btn" width="20" src="src/icons/menu.svg" alt="coração">
+                        <img id="open-menu" class="icon cross-btn" width="20" src="src/icons/cancel.svg" alt="coração">
+                        <form name="adminAtividade" action="ControleTabs" method="POST" class="menu-panel">
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
                             <input type="submit" name="acao" value="Atividades" class="tabs">
@@ -89,6 +91,7 @@
                     <p><a href='/'>Termos de Uso</a></p>
                 </footer>
         </div>
-        <script src="" async defer></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="src/js/menuMobile.js"></script>
     </body>
 </html>

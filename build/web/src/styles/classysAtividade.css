@@ -111,6 +111,21 @@ ul {
     margin-left: 10px;
 }
 
+@media screen and (max-width: 1023px) { 
+    .classy-atividade {
+        width: 90%;
+    }
+    
+    .classy-atividade .footer {
+        padding: 14px 12px;
+    }
+    
+    .classy-atividade .footer p strong {
+    display: none;
+}
+
+}
+
 
 
 

@@ -40,7 +40,9 @@
                         </div>
                     </div>
                     <nav>
-                        <form name="alunoAtividade" action="ControleTabsUser" method="POST" >
+                       <img id="open-menu" class="icon menu-btn" width="20" src="src/icons/menu.svg" alt="coração">
+                        <img id="open-menu" class="icon cross-btn" width="20" src="src/icons/cancel.svg" alt="coração">
+                        <form name="adminAtividade" action="ControleTabsUser" method="POST" class="menu-panel">
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs">
@@ -52,7 +54,9 @@
                     </nav>
                 </header>
                 <div class="filters">
-                    <form name="filtros" action="ControleProva" method="POST">
+                    <button class="filter-btn">Filtrar</button>
+                    <form name="filtros" action="ControleFiltros" method="POST" class="filter-panel">
+                        <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                         <p>Filtrar por matéria:</p>
                         <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                         <select id="materias" name="txtMateria" placeholder="Matérias">
@@ -65,8 +69,8 @@
                                         }
                                 %>
                         </select>
-                        <input type="submit" name="acao" value="Filtrar">
-                        <input type="submit" name="acao" value="Todos" class="todos">
+                            <input type="submit" name="acao" value="Filtre">
+                        <input type="submit" name="acao" value="Todas as Provas" class="todos">
                     </form>
                 </div>
                 <ul> 
@@ -101,6 +105,14 @@
                     <p>O que é o <a href='/' class="classy">Classy.?</a></p>
                     <p><a href='/'>Termos de Uso</a></p>
                 </footer>
-        <script src="" async defer></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="src/js/menuMobile.js"></script>
+                    <script>
+         $(".filter-btn").click(
+            function() {
+              $('.filter-panel').toggleClass('showPanel');
+            }
+          );
+    </script>
     </body>
 </html>

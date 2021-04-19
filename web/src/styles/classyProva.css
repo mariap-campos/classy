@@ -104,6 +104,23 @@
     margin-left: 10px;
 }
 
+@media screen and (max-width: 1023px) { 
+    
+    ul {
+        padding: 0px;
+    }
+    
+    .classy-prova {
+        width: 68%;
+        flex-direction: column;
+    }
+    
+    .classy-prova .ativ-top {
+    padding: 0px;
+}
+
+}
+
 
 
 

@@ -44,3 +44,50 @@
     background-color: var(--grayDark)!important;
     transition: 0.5s ease all;
 }
+
+    .filter-btn {
+        display: none;
+        
+    }
+
+@media screen and (max-width: 1023px) { 
+    
+
+    .filter-panel {
+        opacity:0;
+        pointer-events: none;
+    }
+    
+    .filters form {
+        position: fixed;
+        bottom: 48px;
+        left: 0;
+        right: 0;
+        border: 2px solid var(--blue);
+        z-index: 4;
+    }
+    
+    .filter-btn {
+        display: block;
+        opacity: 1;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: var(--blue);
+        padding: 14px;
+        border: none;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        color: white;
+        font-weight: 600;
+        
+    }
+    
+      .showPanel{
+        opacity:1;
+       pointer-events: all;
+      }
+
+}
+    
+   

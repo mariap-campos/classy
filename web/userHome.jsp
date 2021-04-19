@@ -44,7 +44,9 @@
                           
                     </div>
                     <nav>
-                        <form name="adminAtividade" action="ControleTabsUser" method="POST" >
+                       <img id="open-menu" class="icon menu-btn" width="20" src="src/icons/menu.svg" alt="coração">
+                        <img id="open-menu" class="icon cross-btn" width="20" src="src/icons/cancel.svg" alt="coração">
+                        <form name="adminAtividade" action="ControleTabsUser" method="POST" class="menu-panel">
                             <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
                             <input type="number" name="id_aluno" value="<%= aluno.getId() %>" style="display: none;">
                             <input type="submit" name="acao" value="Home" class=" tabs current">
@@ -141,6 +143,7 @@
                     <p><a href='/'>Termos de Uso</a></p>
                 </footer>
         </div>
-        <script src="" async defer></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="src/js/menuMobile.js"></script>
     </body>
 </html>
