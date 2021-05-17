@@ -46,14 +46,9 @@ public class ControleTabsUser extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String acao = request.getParameter("acao");
             if ("Home".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
                 int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                classyId.setToken(id);
                 
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Atividade atividade = new Atividade();
                 atividade.setClassy_token(id);
@@ -72,7 +67,6 @@ public class ControleTabsUser extends HttpServlet {
                 
                 Aluno aluno = adao.consultarPorId(alunoId);
                 
-                request.setAttribute("classy", classy);
                 request.setAttribute("aluno", aluno);
                 request.setAttribute("atividades", ativBuscar);
                 request.setAttribute("provas", provaBuscar);
@@ -80,8 +74,6 @@ public class ControleTabsUser extends HttpServlet {
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -90,30 +82,18 @@ public class ControleTabsUser extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = adao.consultarTodos(ativ);
                     
-                    ClassyDAO cdao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = cdao.consultarPorId(classy);
-                    
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
                     alunoId.setId(id_aluno);
 
                     Aluno aluno = aldao.consultarPorId(alunoId);
                     
-                    request.setAttribute("classy", classyBuscar);
                     request.setAttribute("atividades", todosAtividade);
                     request.setAttribute("aluno", aluno);
-                    request.setAttribute("isAdmin", "false");
                     request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
             }  else if ("Provas".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
                 int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Prova prova = new Prova();
                 prova.setToken_classy(id);
@@ -128,18 +108,11 @@ public class ControleTabsUser extends HttpServlet {
                 Aluno aluno = aldao.consultarPorId(alunoId);
 
                 request.setAttribute("provas", todosProva);
-                request.setAttribute("classy", classy);
                 request.setAttribute("aluno", aluno);
                 request.getRequestDispatcher("userProva.jsp").forward(request, response);
             } else if ("Alunos".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
                 int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Aluno forum = new Aluno();
                 forum.setClassy_token(id);
@@ -153,18 +126,12 @@ public class ControleTabsUser extends HttpServlet {
                 Aluno aluno = fdao.consultarPorId(alunoId);
                 
                 request.setAttribute("alunos", todosAlunos);
-                request.setAttribute("classy", classy);
                 request.setAttribute("aluno", aluno);
                 request.getRequestDispatcher("userAlunos.jsp").forward(request, response);
             } else if ("Forum".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
                 int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                classyId.setToken(id);
                 
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Forum forum = new Forum();
                 forum.setClassy_token(id);
@@ -180,7 +147,6 @@ public class ControleTabsUser extends HttpServlet {
 
 
                 request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
                 request.setAttribute("aluno", aluno);
                 request.getRequestDispatcher("userForum.jsp").forward(request, response);
             } 

@@ -22,8 +22,9 @@
     </head>
     <body>
         <% 
-            String[] materias = (String[]) request.getAttribute("materias");
-            Classy classy = (Classy) request.getAttribute("classy");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
+            String[] materias = (String[])sessao.getAttribute("materias");
         %>
         <div class="container">
                 <header class="header">

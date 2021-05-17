@@ -25,10 +25,10 @@
     <body>
         <% 
             ArrayList<Prova> listaProva = (ArrayList<Prova>) request.getAttribute("provas");
-            Classy classy = (Classy) request.getAttribute("classy");
-            SeparateSubject separator = new SeparateSubject();
-            String[] materias = separator.splitSubjects(classy.getMaterias());
-            Aluno aluno = (Aluno) request.getAttribute("aluno");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
+            String[] materias = (String[])sessao.getAttribute("materias");
+            Aluno aluno = (Aluno)sessao.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">

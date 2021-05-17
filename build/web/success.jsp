@@ -86,6 +86,10 @@
         window.onload = function() {
         setTimeout(function(){ $('#home').click(); }, 4000)
     }
+        <% } else if (request.getAttribute("tipo") == "home") {%>
+        window.onload = function() {
+        setTimeout(function(){ window.location.pathname = 'Classy/adminHome.jsp'; }, 4000)
+    }
      <% } else if (request.getAttribute("tipo") == "Aluno") {%>
         window.onload = function() {
         setTimeout(function(){ $('#listarAluno').click(); }, 4000)

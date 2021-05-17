@@ -45,8 +45,6 @@ public class ControleFiltros extends HttpServlet {
             if ("Todos".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -55,9 +53,6 @@ public class ControleFiltros extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarTodos(ativ);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
                     
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
@@ -67,13 +62,10 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
             }  else if ("10 dias seguintes".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -81,10 +73,7 @@ public class ControleFiltros extends HttpServlet {
                     dao.AtividadeDAO cdao = new dao.AtividadeDAO();
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultar10(ativ);
-                    
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
+                   
                     
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
@@ -94,13 +83,10 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
             } else if ("Atrasadas".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -108,10 +94,7 @@ public class ControleFiltros extends HttpServlet {
                     dao.AtividadeDAO cdao = new dao.AtividadeDAO();
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarAtrasadas(ativ);
-                    
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
+        
                     
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
@@ -121,14 +104,11 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
             } else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
+                   
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -137,10 +117,7 @@ public class ControleFiltros extends HttpServlet {
                     dao.AtividadeDAO cdao = new dao.AtividadeDAO();
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarPorMateria(ativ);
-                    
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
+
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
                     alunoId.setId(id_aluno);
@@ -149,14 +126,10 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userAtividade.jsp").forward(request, response);
             }  else if ("Filtre".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Prova prova = new Prova();
                     prova.setToken_classy(classy_token);
@@ -165,10 +138,6 @@ public class ControleFiltros extends HttpServlet {
                     ProvaDAO cdao = new ProvaDAO();
                     ArrayList<Prova> todosProva = new ArrayList<Prova>();
                     todosProva = cdao.consultarPorMateria(prova);
-                    
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
                     alunoId.setId(id_aluno);
@@ -177,13 +146,10 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("provas", todosProva);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userProva.jsp").forward(request, response);
             } else if ("Todas as Provas".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     int id_aluno = Integer.parseInt(request.getParameter("id_aluno"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Prova prova = new Prova();
                     prova.setToken_classy(classy_token);
@@ -191,10 +157,7 @@ public class ControleFiltros extends HttpServlet {
                     ProvaDAO cdao = new ProvaDAO();
                     ArrayList<Prova> todosProva = new ArrayList<Prova>();
                     todosProva = cdao.consultarTodos(prova);
-                    
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
+
                     AlunoDAO aldao = new AlunoDAO();
                     Aluno alunoId = new Aluno();
                     alunoId.setId(id_aluno);
@@ -203,7 +166,6 @@ public class ControleFiltros extends HttpServlet {
                     
                     request.setAttribute("aluno", aluno);
                     request.setAttribute("provas", todosProva);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("userProva.jsp").forward(request, response);
             } 
         }

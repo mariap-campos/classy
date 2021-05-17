@@ -22,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Admin;
 import modelo.Classy;
 import modelo.Forum;
@@ -56,16 +57,17 @@ public class ControleClassy extends HttpServlet {
                 
                 ClassyDAO cdao = new ClassyDAO();
                 Classy classy = new Classy();
+
                 classy = cdao.consultarPorId(classyId); 
-                
-                AdminDAO adao = new AdminDAO();
                 Admin adminId = new Admin();
                 adminId.setId(classy.getId_admin());
                 
-                Admin admin = adao.consultarPorId(adminId);
+                SeparateSubject separator = new SeparateSubject();
+                String[] materias = separator.splitSubjects(classy.getMaterias());
                 
-                request.setAttribute("classy", classy);
-                request.setAttribute("admin", admin);
+                HttpSession sessao = request.getSession();                     
+                sessao.setAttribute("classy",classy); 
+                sessao.setAttribute("materias",materias); 
                 request.getRequestDispatcher("adminHome.jsp").forward(request, response);
             } else if ("Novo Classy +".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -130,6 +132,8 @@ public class ControleClassy extends HttpServlet {
                 ConverteDate conversor = new ConverteDate();
                 Date data1 = conversor.getDate(request.getParameter("campoInicio"));
                 Date data2 = conversor.getDate(request.getParameter("campoFinal"));
+                
+                
                
                 classy.setData_inicio(data1);
                 classy.setData_final(data2);
@@ -138,6 +142,11 @@ public class ControleClassy extends HttpServlet {
                 
                 try {
                 cdao.atualizar(classy);
+                SeparateSubject separator = new SeparateSubject();
+                String[] materias = separator.splitSubjects(classy.getMaterias());
+                HttpSession sessao = request.getSession();                     
+                sessao.setAttribute("materias",materias); 
+                
                 request.setAttribute("title", "Informações do Classy atualizado!");
                 request.setAttribute("mensagem", "Voltando a página de listagem de seus classys.");
                 request.setAttribute("tipo", "Listar");
@@ -149,47 +158,6 @@ public class ControleClassy extends HttpServlet {
                     request.setAttribute("tipo", "Listar");
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
-            } else if ("Nova Atividade".equals(acao)) {
-                modelo.Classy classy = new modelo.Classy();
-                classy.setToken(Integer.parseInt(request.getParameter("id")));
-                
-                
-                dao.ClassyDAO cdao = new dao.ClassyDAO();
-                Classy classyBuscar = new Classy();
-                classyBuscar = cdao.consultarPorId(classy);
-                
-                SeparateSubject separator = new SeparateSubject();
-                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
-
-                request.setAttribute("materias", materias);
-                request.setAttribute("classy", classyBuscar);
-                request.getRequestDispatcher("novaAtividade.jsp").forward(request, response);
-            }else if ("Nova Prova".equals(acao)) {
-                modelo.Classy classy = new modelo.Classy();
-                classy.setToken(Integer.parseInt(request.getParameter("id")));
-                
-                
-                dao.ClassyDAO cdao = new dao.ClassyDAO();
-                Classy classyBuscar = new Classy();
-                classyBuscar = cdao.consultarPorId(classy);
-                
-                SeparateSubject separator = new SeparateSubject();
-                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
-
-                request.setAttribute("materias", materias);
-                request.setAttribute("classy", classyBuscar);
-                request.getRequestDispatcher("novaProva.jsp").forward(request, response);
-            } else if ("Novo Aluno".equals(acao)) {
-                Classy classy = new modelo.Classy();
-                classy.setToken(Integer.parseInt(request.getParameter("id")));
-                
-                
-                dao.ClassyDAO cdao = new dao.ClassyDAO();
-                Classy classyBuscar = new Classy();
-                classyBuscar = cdao.consultarPorId(classy);
-                
-                request.setAttribute("classy", classyBuscar);
-                request.getRequestDispatcher("novoAluno.jsp").forward(request, response);
             } else if ("Apagar".equals(acao)) {
                 modelo.Classy classy = new modelo.Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -228,16 +196,12 @@ public class ControleClassy extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request, response);
                 }
             } else if ("Publicar no Forum".equals(acao)) {
-                Classy classyId = new Classy();
-                int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
                 
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
-                
+                HttpSession sessao = request.getSession();
+                Classy classy = (Classy)sessao.getAttribute("classy");
+
                 Forum forum = new Forum();
-                forum.setClassy_token(id);
+                forum.setClassy_token(classy.getToken());
                 
                 ForumDAO fdao = new ForumDAO();
                 ArrayList<Forum> todosPost = new ArrayList<Forum>();
@@ -245,7 +209,6 @@ public class ControleClassy extends HttpServlet {
 
 
                 request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
                 request.getRequestDispatcher("adminForum.jsp").forward(request, response);
             } 
         } catch (Exception e) {

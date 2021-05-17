@@ -22,7 +22,8 @@
     </head>
     <body>
         <% 
-            Classy classy = (Classy) request.getAttribute("classy");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
         %>
         <div class="container">
                 <header class="header">

@@ -32,7 +32,8 @@
     <body>
          <% 
             ArrayList<Atividade> listaAtiv = (ArrayList<Atividade>) request.getAttribute("atividades");
-            Classy classy = (Classy) request.getAttribute("classy");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
             SeparateSubject separator = new SeparateSubject();
             String[] materias = separator.splitSubjects(classy.getMaterias());
         %>

@@ -26,9 +26,10 @@
     </head>
     <body>
         <% 
-            Classy classy = (Classy) request.getAttribute("classy");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
             ArrayList<Forum> listaPosts = (ArrayList<Forum>) request.getAttribute("posts");
-            Aluno aluno = (Aluno) request.getAttribute("aluno");
+            Aluno aluno = (Aluno)sessao.getAttribute("aluno");
         %>
         <div class="container">
             <header class="header">
@@ -82,7 +83,7 @@
                     <li class="classy-forum">
                         <div class="user">
                             <p><%= f.getNome() %></p>
-                            <% if(f.getImagem() == null) { %>
+                            <% if(f.getImagem() == null || f.getImagem().equals("")) { %>
                                     <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
                             <% } else { %>
                                     <img class="imagem-perfil" src="<%= f.getImagem() %>" alt="usuario">

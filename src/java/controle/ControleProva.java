@@ -120,18 +120,9 @@ public class ControleProva extends HttpServlet {
                 dao.ProvaDAO cdao = new dao.ProvaDAO();
                 Prova provaBuscar = new Prova();
                 provaBuscar = cdao.consultarPorId(prova);
-
                 
-                Classy classy = new Classy();    
-                classy.setToken(provaBuscar.getToken_classy());
-                ClassyDAO cldao = new ClassyDAO();
-                Classy classyBuscar = cldao.consultarPorId(classy);
-                
-                SeparateSubject separator = new SeparateSubject();    
-                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
                    
                 request.setAttribute("prova", provaBuscar);
-                request.setAttribute("materias", materias);
                 request.getRequestDispatcher("atualizarProva.jsp").forward(request, response);
             } else if ("Atualizar".equals(acao)) {
                 Prova prova = new Prova();
@@ -166,9 +157,6 @@ public class ControleProva extends HttpServlet {
             }  else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
-                    
                     Prova prova = new Prova();
                     prova.setToken_classy(classy_token);
                     prova.setMateria(request.getParameter("txtMateria"));
@@ -177,17 +165,11 @@ public class ControleProva extends HttpServlet {
                     ArrayList<Prova> todosProva = new ArrayList<Prova>();
                     todosProva = cdao.consultarPorMateria(prova);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
                     
                     request.setAttribute("provas", todosProva);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminProva.jsp").forward(request, response);
             } else if ("Todos".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Prova prova = new Prova();
                     prova.setToken_classy(classy_token);
@@ -196,12 +178,7 @@ public class ControleProva extends HttpServlet {
                     ArrayList<Prova> todosProva = new ArrayList<Prova>();
                     todosProva = cdao.consultarTodos(prova);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
-                    
                     request.setAttribute("provas", todosProva);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminProva.jsp").forward(request, response);
             }
         }

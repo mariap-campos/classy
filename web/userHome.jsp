@@ -27,8 +27,9 @@
     </head>
     <body>
         <% 
-            Classy classy = (Classy) request.getAttribute("classy");
-            Aluno aluno = (Aluno) request.getAttribute("aluno");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
+            Aluno aluno = (Aluno)sessao.getAttribute("aluno");
             ArrayList<Atividade> ativ = (ArrayList<Atividade>) request.getAttribute("atividades");
             ArrayList<Prova> prova = (ArrayList<Prova>) request.getAttribute("provas");
         %>
@@ -60,7 +61,7 @@
                 <div class="classy-box">
                     <div class="perfil">
                             <div class="user">
-                                <% if(aluno.getImagem() == null) { %>
+                                <% if(aluno.getImagem() == null || aluno.getImagem().equals("")) { %>
                                     <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
                                 <% } else { %>
                                     <img class="imagem-perfil" src="<%= aluno.getImagem() %>" alt="usuario">

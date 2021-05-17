@@ -17,10 +17,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.Aluno;
 import modelo.Atividade;
 import modelo.Classy;
 import modelo.Prova;
+import util.SeparateSubject;
 
 /**
  *
@@ -77,7 +79,6 @@ public class ControleAluno extends HttpServlet {
             } else if ("Apagar".equals(acao)) {
                 Aluno aluno = new Aluno();
                 int id = Integer.parseInt(request.getParameter("id"));
-                int classy_id = Integer.parseInt(request.getParameter("classy_id"));
                 
                 aluno.setId(id);
                 AlunoDAO adao = new AlunoDAO();
@@ -87,7 +88,6 @@ public class ControleAluno extends HttpServlet {
                 
                 request.setAttribute("title", "Aluno apagado com sucesso!");
                 request.setAttribute("mensagem", "Voltando a lista");
-                request.setAttribute("classy", classy_id);
                 request.setAttribute("tipo", "Aluno");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
                 
@@ -113,7 +113,6 @@ public class ControleAluno extends HttpServlet {
             } else if ("Atualizar".equals(acao)) {
                 Aluno aluno = new Aluno();
                 int id = Integer.parseInt(request.getParameter("id"));
-                int id_classy = Integer.parseInt(request.getParameter("id_classy"));
                 
                 aluno.setId(id);
                 aluno.setNome(request.getParameter("txtNomeAluno"));
@@ -128,7 +127,6 @@ public class ControleAluno extends HttpServlet {
                 
                 request.setAttribute("title", "Informações do aluno atualizadas!");
                 request.setAttribute("mensagem", "Voltando a página de listagem.");
-                request.setAttribute("classy", id_classy);
                 request.setAttribute("tipo", "Aluno");
                 request.getRequestDispatcher("success.jsp").forward(request, response);
                 
@@ -149,14 +147,7 @@ public class ControleAluno extends HttpServlet {
                 
                 if (aluno.getRgm().equals(alunoLogado.getRgm())) {
                     
-                    Aluno alunoId = new Aluno();
-                    alunoId = adao.getId(alunoLogado);
-                    
-                    ClassyDAO cdao = new ClassyDAO();
-                    Classy classy = new Classy();
-                    classy.setToken(alunoLogado.getClassy_token());
-                    Classy classyBuscar = cdao.consultarPorId(classy);
-                    
+                            
                     Atividade atividade = new Atividade();
                     atividade.setClassy_token(alunoLogado.getClassy_token());
                     AtividadeDAO atdao = new AtividadeDAO();
@@ -166,10 +157,19 @@ public class ControleAluno extends HttpServlet {
                     prova.setToken_classy(alunoLogado.getClassy_token());
                     ProvaDAO pdao = new ProvaDAO();
                     ArrayList<Prova> provaBuscar = pdao.consultarHome(prova);
-                   
-                   
-                    request.setAttribute("aluno", alunoLogado);
-                    request.setAttribute("classy", classyBuscar);
+                    
+                    Classy classy = new Classy();
+                    classy.setToken(alunoLogado.getClassy_token());
+                    ClassyDAO cdao = new ClassyDAO();
+                    Classy classyBuscar = cdao.consultarPorId(classy);
+                    
+                    SeparateSubject separator = new SeparateSubject();
+                    String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
+                        
+                    HttpSession sessao = request.getSession();                     
+                    sessao.setAttribute("aluno", alunoLogado);  
+                    sessao.setAttribute("classy", classyBuscar);  
+                    sessao.setAttribute("materias",materias); 
                     request.setAttribute("atividades", ativBuscar);
                     request.setAttribute("provas", provaBuscar);
                     request.getRequestDispatcher("userHome.jsp").forward(request, response);
@@ -180,16 +180,7 @@ public class ControleAluno extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request, response);;
                 }
             }  else if ("Editar Dados".equals(acao)) {
-                int id = Integer.parseInt(request.getParameter("id"));
-          
-                Aluno aluno = new Aluno();
-                aluno.setId(id);
-                
-                AlunoDAO cdao = new AlunoDAO();
-                Aluno alunoBuscar = new Aluno();
-                alunoBuscar = cdao.consultarPorId(aluno);
-                   
-                request.setAttribute("aluno", alunoBuscar);
+
                 request.getRequestDispatcher("editarDados.jsp").forward(request, response);
             } else if ("Atualizar Dados".equals(acao)) {
                 Aluno aluno = new Aluno();

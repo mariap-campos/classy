@@ -28,8 +28,9 @@
     <body>
          <% 
             ArrayList<Aluno> listaAlunos = (ArrayList<Aluno>) request.getAttribute("alunos");
-            Classy classy = (Classy) request.getAttribute("classy");
-            Aluno aluno = (Aluno) request.getAttribute("aluno");
+            HttpSession sessao = request.getSession();
+            Classy classy = (Classy)sessao.getAttribute("classy");
+            Aluno aluno = (Aluno)sessao.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">

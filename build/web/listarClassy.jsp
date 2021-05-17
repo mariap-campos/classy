@@ -25,7 +25,8 @@
     <body>
         <% 
             ArrayList<Classy> listaClassy = (ArrayList<Classy>) request.getAttribute("classys");
-            Admin admin = (Admin) request.getAttribute("admin");
+            HttpSession sessao = request.getSession();
+            Admin admin = (Admin)sessao.getAttribute("admin"); 
         %>
         <div class="container">
                 <header class="header">
@@ -41,7 +42,7 @@
                 <div class="content">
                     <div class="perfil">
                             <div class="user">
-                                <% if(admin.getImagem() == null) { %>
+                                <% if(admin.getImagem() == null || admin.getImagem().equals("")) { %>
                                     <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
                                 <% } else { %>
                                     <img class="imagem-perfil" src="<%= admin.getImagem() %>" alt="usuario">

@@ -141,7 +141,7 @@ background-color: var(--back)!important;
     font-size: 16px;
 }
 
-.classy-options form {
+.classy-options div, .classy-options form {
     display: flex;
     flex-direction: column;
 }
@@ -150,22 +150,20 @@ background-color: var(--back)!important;
     display: none;
 }
 
-.classy-options .options:nth-of-type(4) {
+.options-input {
+    width: 85%!important;
+    height: 65px!important;
+    background-color: var(--grayDark)!important;
+    box-shadow: 3px 3px 0px 0 var(--black)!important;
+}
+
+.classy-options .options:nth-of-type(3) {
     background-color: var(--blue);
     box-shadow: 3px 3px 0px 0 var(--darkblue);
 }
 
-.classy-options .options:nth-of-type(4):hover {
+.classy-options .options:nth-of-type(3):hover {
     background-color: var(--darkblue);
-}
-
-.classy-options .options:nth-of-type(5) {
-    background-color: var(--grayDark);
-    box-shadow: 3px 3px 0px 0 var(--black);
-}
-
-.classy-options .options:nth-of-type(5):hover {
-    background-color: var(--black);
 }
 
 

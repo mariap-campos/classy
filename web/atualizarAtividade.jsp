@@ -19,7 +19,8 @@
     <body>
         <% 
             Atividade ativ = (Atividade) request.getAttribute("atividade");
-            String[] materias = (String[]) request.getAttribute("materias");
+            HttpSession sessao = request.getSession();
+            String[] materias = (String[])sessao.getAttribute("materias");
         %>
         <div class="container">
                 <header class="header">

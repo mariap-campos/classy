@@ -47,27 +47,9 @@ public class ControleTabs extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String acao = request.getParameter("acao");
             if ("Home".equals(acao)) {
-                Classy classyId = new Classy();
-                int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
-                
-                AdminDAO adao = new AdminDAO();
-                Admin adminId = new Admin();
-                adminId.setId(classy.getId_admin());
-                
-                Admin admin = adao.consultarPorId(adminId);
-                
-                request.setAttribute("classy", classy);
-                request.setAttribute("admin", admin);
                 request.getRequestDispatcher("adminHome.jsp").forward(request, response);
             } else if ("Atividades".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -76,22 +58,10 @@ public class ControleTabs extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = adao.consultarTodos(ativ);
                     
-                    ClassyDAO cdao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = cdao.consultarPorId(classy);
-                    
-                    request.setAttribute("classy", classyBuscar);
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("isAdmin", true);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("Forum".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Forum forum = new Forum();
                 forum.setClassy_token(id);
@@ -102,16 +72,9 @@ public class ControleTabs extends HttpServlet {
 
 
                 request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
                 request.getRequestDispatcher("adminForum.jsp").forward(request, response);
             } else if ("Alunos".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Aluno forum = new Aluno();
                 forum.setClassy_token(id);
@@ -122,16 +85,9 @@ public class ControleTabs extends HttpServlet {
 
 
                 request.setAttribute("alunos", todosAlunos);
-                request.setAttribute("classy", classy);
                 request.getRequestDispatcher("adminAluno.jsp").forward(request, response);
             } else if ("Provas".equals(acao)) {
-                Classy classyId = new Classy();
                 int id = Integer.parseInt(request.getParameter("id"));
-                classyId.setToken(id);
-                
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
                 
                 Prova prova = new Prova();
                 prova.setToken_classy(id);
@@ -142,7 +98,6 @@ public class ControleTabs extends HttpServlet {
 
 
                 request.setAttribute("provas", todosProva);
-                request.setAttribute("classy", classy);
                 request.getRequestDispatcher("adminProva.jsp").forward(request, response);
             }
         } catch (Exception e) {

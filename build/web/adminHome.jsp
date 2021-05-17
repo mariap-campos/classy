@@ -24,8 +24,9 @@
     </head>
     <body>
         <% 
-            Classy classy = (Classy) request.getAttribute("classy");
-            Admin admin = (Admin) request.getAttribute("admin");
+            HttpSession sessao = request.getSession();
+            Admin admin = (Admin)sessao.getAttribute("admin"); 
+            Classy classy = (Classy)sessao.getAttribute("classy");
         %>
         <div class="container">
                 <header class="header">
@@ -57,7 +58,7 @@
                 <div class="classy-box">
                     <div class="perfil">
                         <div class="user">
-                            <% if(admin.getImagem() == null) { %>
+                            <% if(admin.getImagem() == null || admin.getImagem().equals("")) { %>
                                     <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
                             <% } else { %>
                                     <img class="imagem-perfil" src="<%= admin.getImagem() %>" alt="usuario">
@@ -76,12 +77,13 @@
                             <img src="src/images/hero-img3.png" class="img" alt="Meeting">
                         </div>
                         <div class="classy-options">
+                            <div >
+                                <a class="options" href="novaAtividade.jsp">Nova Atividade </a>
+                                <a class="options" href="novaProva.jsp">Nova Prova </a>
+                                <a class="options"  href="novoAluno.jsp" >Nova Aluno </a>
+                            </div>
                             <form name="adminAtividade" name="FEntrada" action="ControleClassy" method="POST" >
-                                <input type="number" name="id" value="<%= classy.getToken() %>" style="display: none;">
-                                <input class="options" type="submit" name="acao" value="Nova Atividade">
-                                <input class="options" type="submit" name="acao" value="Nova Prova">
-                                <input class="options" type="submit" name="acao" value="Novo Aluno">
-                                <input class="options" type="submit" name="acao" value="Publicar no Forum"> 
+                                <input class="options options-input" type="submit" name="acao" value="Publicar no Forum"> 
                             </form>
                     </div>
                 </div>

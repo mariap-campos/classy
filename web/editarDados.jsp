@@ -26,7 +26,8 @@
     </head>
     <body>
         <% 
-            Aluno aluno = (Aluno) request.getAttribute("aluno");
+            HttpSession sessao = request.getSession();
+            Aluno aluno = (Aluno)sessao.getAttribute("aluno");
         %>
         <div class="container">
                 <header class="header">
@@ -45,14 +46,14 @@
                             <input type="number" name="id" value="<%= aluno.getId() %>" style="display: none;">
                             <div class="perfil atualizar">
                             <div class="user">
-                                <% if(aluno.getImagem() == null) { %>
+                                <% if(aluno.getImagem() == null || aluno.getImagem().equals("")) { %>
                                     <img class="icon-perfil" width="80" src="src/icons/user.svg" alt="usuario">
                                 <% } else { %>
                                     <img class="imagem-perfil" src="<%= aluno.getImagem() %>" alt="usuario">
                                 <% }%>
                             </div>
                             <div class="input-imagem">
-                                <% if(aluno.getImagem() == null) { %>
+                                <% if(aluno.getImagem() == null  ) { %>
                                     <input type="text" name="campoImagem" id="campoImagem" placeholder="Link da sua imagem de perfil">
                                 <% } else { %>
                                     <input type="text" name="campoImagem" id="campoImagem" placeholder="Link da sua imagem de perfil" value="<%= aluno.getImagem() %>">

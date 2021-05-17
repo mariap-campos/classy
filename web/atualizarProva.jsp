@@ -23,7 +23,8 @@
     <body>
         <% 
             Prova prova = (Prova) request.getAttribute("prova");
-            String[] materias = (String[]) request.getAttribute("materias");
+            HttpSession sessao = request.getSession();
+            String[] materias = (String[])sessao.getAttribute("materias");
         %>
         <div class="container">
                 <header class="header">

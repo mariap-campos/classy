@@ -47,9 +47,6 @@ public class ControleForum extends HttpServlet {
                 int id_user = Integer.parseInt(request.getParameter("id"));
                 int classy_token = Integer.parseInt(request.getParameter("id_classy"));
                 
-                Classy classyId = new Classy();
-                classyId.setToken(classy_token);
-                
                 AdminDAO adao = new AdminDAO();
                 Admin admin = new Admin();
                 admin.setId(id_user);
@@ -65,20 +62,13 @@ public class ControleForum extends HttpServlet {
                 
                 ForumDAO fdao = new ForumDAO();
                 
-                System.out.println("seila" + forum.getPostagem());
-                
                 try {
                 fdao.postar(forum);
-                System.out.println("postou");
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
     
                 ArrayList<Forum> todosPost = new ArrayList<Forum>();
                 todosPost = fdao.consultarTodos(forum);
 
                 request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
                 request.getRequestDispatcher("adminForum.jsp").forward(request, response);
                 
                 } catch (Exception e){
@@ -110,20 +100,13 @@ public class ControleForum extends HttpServlet {
                 
                 ForumDAO fdao = new ForumDAO();
                 
-                System.out.println("seila" + forum.getPostagem());
-                
                 try {
                 fdao.postar(forum);
-                System.out.println("postou");
-                ClassyDAO cdao = new ClassyDAO();
-                Classy classy = new Classy();
-                classy = cdao.consultarPorId(classyId); 
     
                 ArrayList<Forum> todosPost = new ArrayList<Forum>();
                 todosPost = fdao.consultarTodos(forum);
 
                 request.setAttribute("posts", todosPost);
-                request.setAttribute("classy", classy);
                 request.setAttribute("aluno", alunoBuscar);
                 request.getRequestDispatcher("userForum.jsp").forward(request, response);
                 

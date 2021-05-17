@@ -20,6 +20,7 @@ import modelo.Admin;
 import modelo.Classy;
 import util.ConverteDate;
 import java.util.UUID;
+import javax.servlet.http.HttpSession;
 import util.randomToken;
 
 /**
@@ -110,7 +111,8 @@ public class ControleAdmin extends HttpServlet {
                     todosClassys = cdao.consultarTodos(classy);
                     
                     request.setAttribute("classys", todosClassys);
-                    request.setAttribute("admin", adminLogado);
+                    HttpSession sessao = request.getSession();                     
+                    sessao.setAttribute("admin",adminLogado);  
                     request.getRequestDispatcher("listarClassy.jsp").forward(request, response);
                 } else {
                     request.setAttribute("title", "Usuário não existe ou está incorreto!");
@@ -120,13 +122,7 @@ public class ControleAdmin extends HttpServlet {
                 }
             } else if ("Voltar ao menu".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
-                
-                Admin admin = new Admin();
-                admin.setId(id);     
-   
-                AdminDAO adao = new AdminDAO();
-                Admin adminLogado = adao.consultarPorId(admin);
-
+               
                 Classy classy = new Classy();
                 classy.setId_admin(id);
                 
@@ -135,7 +131,6 @@ public class ControleAdmin extends HttpServlet {
                 todosClassys = cdao.consultarTodos(classy);
                     
                 request.setAttribute("classys", todosClassys);
-                request.setAttribute("admin", adminLogado);
                 request.getRequestDispatcher("listarClassy.jsp").forward(request, response);
             }  else if ("Enviar email".equals(acao)) {
                 Admin admin = new Admin();
@@ -164,7 +159,7 @@ public class ControleAdmin extends HttpServlet {
                 
                 AdminDAO cdao = new AdminDAO();
                 Admin adminBuscar = new Admin();
-                adminBuscar = cdao.consultarPorId(admin);
+                adminBuscar = cdao.consultarPorId(admin); 
                    
                 request.setAttribute("admin", adminBuscar);
                 request.getRequestDispatcher("atualizarAdmin.jsp").forward(request, response);
@@ -192,9 +187,11 @@ public class ControleAdmin extends HttpServlet {
                     
                     } else {
                         cdao.atualizar(admin);
+                        HttpSession sessao = request.getSession();                     
+                        sessao.setAttribute("admin",admin); 
                         request.setAttribute("title", "Dados atualizados!");
                         request.setAttribute("mensagem", "Voltando a home");
-                        request.setAttribute("tipo", "Listar");
+                        request.setAttribute("tipo", "home");
                         request.getRequestDispatcher("success.jsp").forward(request, response);
                     }
                 

@@ -92,8 +92,6 @@ public class ControleAtividade extends HttpServlet {
                 
             } else if ("Todos".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -102,17 +100,11 @@ public class ControleAtividade extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarTodos(ativ);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
                     
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("10 dias seguintes".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -121,17 +113,10 @@ public class ControleAtividade extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultar10(ativ);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
-                    
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("Atrasadas".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
                     
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
@@ -140,12 +125,7 @@ public class ControleAtividade extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarAtrasadas(ativ);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
-                    
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
@@ -161,12 +141,8 @@ public class ControleAtividade extends HttpServlet {
                     ArrayList<Atividade> todosAtividade = new ArrayList<Atividade>();
                     todosAtividade = cdao.consultarPorMateria(ativ);
                     
-                    ClassyDAO dao = new ClassyDAO();
-                    Classy classyBuscar = new Classy();
-                    classyBuscar = dao.consultarPorId(classy);
                     
                     request.setAttribute("atividades", todosAtividade);
-                    request.setAttribute("classy", classyBuscar);
                     request.getRequestDispatcher("adminAtividade.jsp").forward(request, response);
             } else if ("abrirForm".equals(acao)) {
                 int id = Integer.parseInt(request.getParameter("id"));
@@ -177,18 +153,8 @@ public class ControleAtividade extends HttpServlet {
                 dao.AtividadeDAO cdao = new dao.AtividadeDAO();
                 Atividade ativBuscar = new Atividade();
                 ativBuscar = cdao.consultarPorId(ativ);
-
-                
-                Classy classy = new Classy();    
-                classy.setToken(ativBuscar.getClassy_token());
-                ClassyDAO cldao = new ClassyDAO();
-                Classy classyBuscar = cldao.consultarPorId(classy);
-                
-                SeparateSubject separator = new SeparateSubject();    
-                String[] materias = separator.splitSubjects(classyBuscar.getMaterias());
                    
                 request.setAttribute("atividade", ativBuscar);
-                request.setAttribute("materias", materias);
                 request.getRequestDispatcher("atualizarAtividade.jsp").forward(request, response);
             } else if ("Atualizar".equals(acao)) {
                 Atividade ativ = new Atividade();
