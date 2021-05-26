@@ -18,7 +18,7 @@ public class ConectaBanco {
     Connection conexao = null;
     try {
         Class.forName("org.postgresql.Driver");
-        conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/classy", "postgres", "Ma160600");
+        conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/classy", "postgres", "admin");
     } catch (ClassNotFoundException ex) {
         throw new RuntimeException(ex);
     } catch (SQLException ex) {

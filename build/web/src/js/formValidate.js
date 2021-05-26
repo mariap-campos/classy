@@ -22,6 +22,7 @@ $(function() {
         txtProfessor: "required",
         txtMateria: "required",
         txtData: "required",
+        terms: "required",
         campoEmail: {
             required: true,
             email: true
@@ -34,6 +35,7 @@ $(function() {
         }
         },
         messages: {
+        terms: "Você precisa concordar com os termos de uso",
         campoUsuario: "Por favor, informe um usuário.",
         campoNome: "Por favor, informe seu nome.",
         campoClassy: "Por favor, informe o nome da turma.",

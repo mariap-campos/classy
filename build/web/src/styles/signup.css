@@ -15,6 +15,15 @@
     top: 0;
 }
 
+.checkbox {
+    margin: 20px 0px;
+}
+
+.checkbox label.error {
+    position: absolute;
+    bottom: 138px;
+
+}
 .header-itens {
     width: 60%;
     margin: 0 auto;
