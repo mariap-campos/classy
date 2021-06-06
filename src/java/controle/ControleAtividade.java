@@ -130,9 +130,6 @@ public class ControleAtividade extends HttpServlet {
             } else if ("Filtrar".equals(acao)) {
                     int classy_token = Integer.parseInt(request.getParameter("id"));
                     
-                    Classy classy = new Classy();
-                    classy.setToken(classy_token);
-                    
                     Atividade ativ = new Atividade();
                     ativ.setClassy_token(classy_token);
                     ativ.setMateria(request.getParameter("txtMateria"));
